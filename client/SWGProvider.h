@@ -10,6 +10,8 @@
 #include <QJsonObject>
 
 
+#include "SWGNumber.h"
+#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -48,10 +50,16 @@ QString* getGender();
     void setGender(QString* gender);
 QString* getFirstName();
     void setFirstName(QString* first_name);
+QList<QString*>* getHiosIds();
+    void setHiosIds(QList<QString*>* hios_ids);
 qint32 getId();
     void setId(qint32 id);
 QString* getLastName();
     void setLastName(QString* last_name);
+SWGNumber* getLatitude();
+    void setLatitude(SWGNumber* latitude);
+SWGNumber* getLongitude();
+    void setLongitude(SWGNumber* longitude);
 QString* getMiddleName();
     void setMiddleName(QString* middle_name);
 QString* getPersonalPhone();
@@ -89,8 +97,11 @@ QString* city;
 QString* email;
 QString* gender;
 QString* first_name;
+QList<QString*>* hios_ids;
 qint32 id;
 QString* last_name;
+SWGNumber* latitude;
+SWGNumber* longitude;
 QString* middle_name;
 QString* personal_phone;
 QString* phone;

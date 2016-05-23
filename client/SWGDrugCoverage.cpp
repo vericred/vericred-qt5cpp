@@ -27,7 +27,7 @@ SWGDrugCoverage::~SWGDrugCoverage() {
 void
 SWGDrugCoverage::init() {
     plan_id = new QString("");
-ndc_package_code = new QString("");
+drug_package_id = new QString("");
 tier = new QString("");
 quantity_limit = false;
 prior_authorization = false;
@@ -39,8 +39,8 @@ SWGDrugCoverage::cleanup() {
     if(plan_id != NULL) {
         delete plan_id;
     }
-if(ndc_package_code != NULL) {
-        delete ndc_package_code;
+if(drug_package_id != NULL) {
+        delete drug_package_id;
     }
 if(tier != NULL) {
         delete tier;
@@ -62,7 +62,7 @@ SWGDrugCoverage::fromJson(QString &json) {
 void
 SWGDrugCoverage::fromJsonObject(QJsonObject &pJson) {
     setValue(&plan_id, pJson["plan_id"], "QString", "QString");
-setValue(&ndc_package_code, pJson["ndc_package_code"], "QString", "QString");
+setValue(&drug_package_id, pJson["drug_package_id"], "QString", "QString");
 setValue(&tier, pJson["tier"], "QString", "QString");
 setValue(&quantity_limit, pJson["quantity_limit"], "bool", "");
 setValue(&prior_authorization, pJson["prior_authorization"], "bool", "");
@@ -89,7 +89,7 @@ SWGDrugCoverage::asJsonObject() {
         
 
     
-    toJsonValue(QString("ndc_package_code"), ndc_package_code, obj, QString("QString"));
+    toJsonValue(QString("drug_package_id"), drug_package_id, obj, QString("QString"));
     
         
 
@@ -114,12 +114,12 @@ SWGDrugCoverage::setPlanId(QString* plan_id) {
 }
 
 QString*
-SWGDrugCoverage::getNdcPackageCode() {
-    return ndc_package_code;
+SWGDrugCoverage::getDrugPackageId() {
+    return drug_package_id;
 }
 void
-SWGDrugCoverage::setNdcPackageCode(QString* ndc_package_code) {
-    this->ndc_package_code = ndc_package_code;
+SWGDrugCoverage::setDrugPackageId(QString* drug_package_id) {
+    this->drug_package_id = drug_package_id;
 }
 
 QString*

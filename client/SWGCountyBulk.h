@@ -1,11 +1,11 @@
 /*
- * SWGRatingArea.h
+ * SWGCountyBulk.h
  * 
  * 
  */
 
-#ifndef SWGRatingArea_H_
-#define SWGRatingArea_H_
+#ifndef SWGCountyBulk_H_
+#define SWGCountyBulk_H_
 
 #include <QJsonObject>
 
@@ -17,29 +17,32 @@
 
 namespace Swagger {
 
-class SWGRatingArea: public SWGObject {
+class SWGCountyBulk: public SWGObject {
 public:
-    SWGRatingArea();
-    SWGRatingArea(QString* json);
-    virtual ~SWGRatingArea();
+    SWGCountyBulk();
+    SWGCountyBulk(QString* json);
+    virtual ~SWGCountyBulk();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGRatingArea* fromJson(QString &jsonString);
+    SWGCountyBulk* fromJson(QString &jsonString);
 
     QString* getId();
     void setId(QString* id);
+QString* getName();
+    void setName(QString* name);
 QString* getStateId();
     void setStateId(QString* state_id);
 
 private:
     QString* id;
+QString* name;
 QString* state_id;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGRatingArea_H_ */
+#endif /* SWGCountyBulk_H_ */

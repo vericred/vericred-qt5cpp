@@ -16,9 +16,9 @@ SWGPlansApi::SWGPlansApi(QString host, QString basePath) {
 }
 
 void
-SWGPlansApi::plansFindPost(SWGQuery query) {
+SWGPlansApi::findPlans(SWGRequestPlanFind body) {
     QString fullPath;
-    fullPath.append(this->host).append(this->basePath).append("/plans/find");
+    fullPath.append(this->host).append(this->basePath).append("/plans/search");
 
 
 
@@ -26,7 +26,7 @@ SWGPlansApi::plansFindPost(SWGQuery query) {
     HttpRequestInput input(fullPath, "POST");
 
     
-    QString output = query.asJson();
+    QString output = body.asJson();
     input.request_body.append(output);
     
 
@@ -34,13 +34,13 @@ SWGPlansApi::plansFindPost(SWGQuery query) {
     connect(worker,
             &HttpRequestWorker::on_execution_finished,
             this,
-            &SWGPlansApi::plansFindPostCallback);
+            &SWGPlansApi::findPlansCallback);
 
     worker->execute(&input);
 }
 
 void
-SWGPlansApi::plansFindPostCallback(HttpRequestWorker * worker) {
+SWGPlansApi::findPlansCallback(HttpRequestWorker * worker) {
     QString msg;
     if (worker->error_type == QNetworkReply::NoError) {
         msg = QString("Success! %1 bytes").arg(worker->response.length());
@@ -50,25 +50,13 @@ SWGPlansApi::plansFindPostCallback(HttpRequestWorker * worker) {
     }
 
     
-    QList<SWGPlan*>* output = new QList<SWGPlan*>();
-    QString json(worker->response);
-    QByteArray array (json.toStdString().c_str());
-    QJsonDocument doc = QJsonDocument::fromJson(array);
-    QJsonArray jsonArray = doc.array();
-
-    foreach(QJsonValue obj, jsonArray) {
-        SWGPlan* o = new SWGPlan();
-        QJsonObject jv = obj.toObject();
-        QJsonObject * ptr = (QJsonObject*)&jv;
-        o->fromJsonObject(*ptr);
-        output->append(o);
-    }
-
+        QString json(worker->response);
+    SWGPlanSearchResponse* output = static_cast<SWGPlanSearchResponse*>(create(json, QString("SWGPlanSearchResponse")));
     
 
     worker->deleteLater();
 
-    emit plansFindPostSignal(output);
+    emit findPlansSignal(output);
     
 }
 } /* namespace Swagger */

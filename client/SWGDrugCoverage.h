@@ -32,8 +32,8 @@ public:
 
     QString* getPlanId();
     void setPlanId(QString* plan_id);
-QString* getNdcPackageCode();
-    void setNdcPackageCode(QString* ndc_package_code);
+QString* getDrugPackageId();
+    void setDrugPackageId(QString* drug_package_id);
 QString* getTier();
     void setTier(QString* tier);
 bool getQuantityLimit();
@@ -45,7 +45,7 @@ bool getStepTherapy();
 
 private:
     QString* plan_id;
-QString* ndc_package_code;
+QString* drug_package_id;
 QString* tier;
 bool quantity_limit;
 bool prior_authorization;

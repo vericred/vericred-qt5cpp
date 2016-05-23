@@ -1,5 +1,5 @@
 
-#include "SWGRatingArea.h"
+#include "SWGCountyBulk.h"
 
 #include "SWGHelpers.h"
 
@@ -11,37 +11,41 @@
 namespace Swagger {
 
 
-SWGRatingArea::SWGRatingArea(QString* json) {
+SWGCountyBulk::SWGCountyBulk(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGRatingArea::SWGRatingArea() {
+SWGCountyBulk::SWGCountyBulk() {
     init();
 }
 
-SWGRatingArea::~SWGRatingArea() {
+SWGCountyBulk::~SWGCountyBulk() {
     this->cleanup();
 }
 
 void
-SWGRatingArea::init() {
+SWGCountyBulk::init() {
     id = new QString("");
+name = new QString("");
 state_id = new QString("");
 }
 
 void
-SWGRatingArea::cleanup() {
+SWGCountyBulk::cleanup() {
     if(id != NULL) {
         delete id;
+    }
+if(name != NULL) {
+        delete name;
     }
 if(state_id != NULL) {
         delete state_id;
     }
 }
 
-SWGRatingArea*
-SWGRatingArea::fromJson(QString &json) {
+SWGCountyBulk*
+SWGCountyBulk::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -50,13 +54,14 @@ SWGRatingArea::fromJson(QString &json) {
 }
 
 void
-SWGRatingArea::fromJsonObject(QJsonObject &pJson) {
+SWGCountyBulk::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
+setValue(&name, pJson["name"], "QString", "QString");
 setValue(&state_id, pJson["state_id"], "QString", "QString");
 }
 
 QString
-SWGRatingArea::asJson ()
+SWGCountyBulk::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -66,11 +71,16 @@ SWGRatingArea::asJson ()
 }
 
 QJsonObject*
-SWGRatingArea::asJsonObject() {
+SWGCountyBulk::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     
     
     toJsonValue(QString("id"), id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("name"), name, obj, QString("QString"));
     
         
 
@@ -83,20 +93,29 @@ SWGRatingArea::asJsonObject() {
 }
 
 QString*
-SWGRatingArea::getId() {
+SWGCountyBulk::getId() {
     return id;
 }
 void
-SWGRatingArea::setId(QString* id) {
+SWGCountyBulk::setId(QString* id) {
     this->id = id;
 }
 
 QString*
-SWGRatingArea::getStateId() {
+SWGCountyBulk::getName() {
+    return name;
+}
+void
+SWGCountyBulk::setName(QString* name) {
+    this->name = name;
+}
+
+QString*
+SWGCountyBulk::getStateId() {
     return state_id;
 }
 void
-SWGRatingArea::setStateId(QString* state_id) {
+SWGCountyBulk::setStateId(QString* state_id) {
     this->state_id = state_id;
 }
 

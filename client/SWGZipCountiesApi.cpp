@@ -16,7 +16,7 @@ SWGZipCountiesApi::SWGZipCountiesApi(QString host, QString basePath) {
 }
 
 void
-SWGZipCountiesApi::zipCountiesGet(QString* zipPrefix) {
+SWGZipCountiesApi::getZipCounties(QString* zipPrefix, QString* vericredApiKey) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/zip_counties");
 
@@ -36,17 +36,18 @@ SWGZipCountiesApi::zipCountiesGet(QString* zipPrefix) {
     
 
 
+    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,
             this,
-            &SWGZipCountiesApi::zipCountiesGetCallback);
+            &SWGZipCountiesApi::getZipCountiesCallback);
 
     worker->execute(&input);
 }
 
 void
-SWGZipCountiesApi::zipCountiesGetCallback(HttpRequestWorker * worker) {
+SWGZipCountiesApi::getZipCountiesCallback(HttpRequestWorker * worker) {
     QString msg;
     if (worker->error_type == QNetworkReply::NoError) {
         msg = QString("Success! %1 bytes").arg(worker->response.length());
@@ -57,12 +58,12 @@ SWGZipCountiesApi::zipCountiesGetCallback(HttpRequestWorker * worker) {
 
     
         QString json(worker->response);
-    SWGInline_response_200_2* output = static_cast<SWGInline_response_200_2*>(create(json, QString("SWGInline_response_200_2")));
+    SWGZipCountyResponse* output = static_cast<SWGZipCountyResponse*>(create(json, QString("SWGZipCountyResponse")));
     
 
     worker->deleteLater();
 
-    emit zipCountiesGetSignal(output);
+    emit getZipCountiesSignal(output);
     
 }
 } /* namespace Swagger */

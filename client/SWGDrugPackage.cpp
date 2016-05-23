@@ -1,5 +1,5 @@
 
-#include "SWGRatingArea.h"
+#include "SWGDrugPackage.h"
 
 #include "SWGHelpers.h"
 
@@ -11,37 +11,37 @@
 namespace Swagger {
 
 
-SWGRatingArea::SWGRatingArea(QString* json) {
+SWGDrugPackage::SWGDrugPackage(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGRatingArea::SWGRatingArea() {
+SWGDrugPackage::SWGDrugPackage() {
     init();
 }
 
-SWGRatingArea::~SWGRatingArea() {
+SWGDrugPackage::~SWGDrugPackage() {
     this->cleanup();
 }
 
 void
-SWGRatingArea::init() {
+SWGDrugPackage::init() {
     id = new QString("");
-state_id = new QString("");
+description = new QString("");
 }
 
 void
-SWGRatingArea::cleanup() {
+SWGDrugPackage::cleanup() {
     if(id != NULL) {
         delete id;
     }
-if(state_id != NULL) {
-        delete state_id;
+if(description != NULL) {
+        delete description;
     }
 }
 
-SWGRatingArea*
-SWGRatingArea::fromJson(QString &json) {
+SWGDrugPackage*
+SWGDrugPackage::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -50,13 +50,13 @@ SWGRatingArea::fromJson(QString &json) {
 }
 
 void
-SWGRatingArea::fromJsonObject(QJsonObject &pJson) {
+SWGDrugPackage::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
-setValue(&state_id, pJson["state_id"], "QString", "QString");
+setValue(&description, pJson["description"], "QString", "QString");
 }
 
 QString
-SWGRatingArea::asJson ()
+SWGDrugPackage::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -66,7 +66,7 @@ SWGRatingArea::asJson ()
 }
 
 QJsonObject*
-SWGRatingArea::asJsonObject() {
+SWGDrugPackage::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     
     
@@ -75,7 +75,7 @@ SWGRatingArea::asJsonObject() {
         
 
     
-    toJsonValue(QString("state_id"), state_id, obj, QString("QString"));
+    toJsonValue(QString("description"), description, obj, QString("QString"));
     
         
 
@@ -83,21 +83,21 @@ SWGRatingArea::asJsonObject() {
 }
 
 QString*
-SWGRatingArea::getId() {
+SWGDrugPackage::getId() {
     return id;
 }
 void
-SWGRatingArea::setId(QString* id) {
+SWGDrugPackage::setId(QString* id) {
     this->id = id;
 }
 
 QString*
-SWGRatingArea::getStateId() {
-    return state_id;
+SWGDrugPackage::getDescription() {
+    return description;
 }
 void
-SWGRatingArea::setStateId(QString* state_id) {
-    this->state_id = state_id;
+SWGDrugPackage::setDescription(QString* description) {
+    this->description = description;
 }
 
 
