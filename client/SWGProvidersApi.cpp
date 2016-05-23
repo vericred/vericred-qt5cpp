@@ -16,139 +16,7 @@ SWGProvidersApi::SWGProvidersApi(QString host, QString basePath) {
 }
 
 void
-SWGProvidersApi::providersGet(QString* searchTerm, QString* zipCode, QString* acceptsInsurance, QList<QString*>* hiosIds, QString* page, QString* perPage, QString* radius) {
-    QString fullPath;
-    fullPath.append(this->host).append(this->basePath).append("/providers");
-
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("acceptsInsurance"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(acceptsInsurance)));
-
-
-
-    if (hiosIds->size() > 0) {
-      if (QString("csv").indexOf("multi") == 0) {
-        foreach(QString* t, *hiosIds) {
-          if (fullPath.indexOf("?") > 0)
-            fullPath.append("&");
-          else 
-            fullPath.append("?");
-          fullPath.append("hiosIds=").append(stringValue(t));
-        }
-      }
-      else if (QString("csv").indexOf("ssv") == 0) {
-        if (fullPath.indexOf("?") > 0)
-          fullPath.append("&");
-        else 
-          fullPath.append("?");
-        fullPath.append("hiosIds=");
-        qint32 count = 0;
-        foreach(QString* t, *hiosIds) {
-          if (count > 0) {
-            fullPath.append(" ");
-          }
-          fullPath.append(stringValue(t));
-        }
-      }
-      else if (QString("csv").indexOf("tsv") == 0) {
-        if (fullPath.indexOf("?") > 0)
-          fullPath.append("&");
-        else 
-          fullPath.append("?");
-        fullPath.append("hiosIds=");
-        qint32 count = 0;
-        foreach(QString* t, *hiosIds) {
-          if (count > 0) {
-            fullPath.append("\t");
-          }
-          fullPath.append(stringValue(t));
-        }
-      }
-    }
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("page"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(page)));
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("perPage"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(perPage)));
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("radius"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(radius)));
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("searchTerm"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(searchTerm)));
-
-    if (fullPath.indexOf("?") > 0) 
-      fullPath.append("&");
-    else 
-      fullPath.append("?");
-    fullPath.append(QUrl::toPercentEncoding("zipCode"))
-        .append("=")
-        .append(QUrl::toPercentEncoding(stringValue(zipCode)));
-
-
-    HttpRequestWorker *worker = new HttpRequestWorker();
-    HttpRequestInput input(fullPath, "GET");
-
-    
-
-
-
-    connect(worker,
-            &HttpRequestWorker::on_execution_finished,
-            this,
-            &SWGProvidersApi::providersGetCallback);
-
-    worker->execute(&input);
-}
-
-void
-SWGProvidersApi::providersGetCallback(HttpRequestWorker * worker) {
-    QString msg;
-    if (worker->error_type == QNetworkReply::NoError) {
-        msg = QString("Success! %1 bytes").arg(worker->response.length());
-    }
-    else {
-        msg = "Error: " + worker->error_str;
-    }
-
-    
-        QString json(worker->response);
-    SWGInline_response_200* output = static_cast<SWGInline_response_200*>(create(json, QString("SWGInline_response_200")));
-    
-
-    worker->deleteLater();
-
-    emit providersGetSignal(output);
-    
-}
-void
-SWGProvidersApi::providersNpiGet(QString* npi) {
+SWGProvidersApi::getProvider(QString* npi, QString* vericredApiKey) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/providers/{npi}");
 
@@ -162,17 +30,18 @@ SWGProvidersApi::providersNpiGet(QString* npi) {
     
 
 
+    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,
             this,
-            &SWGProvidersApi::providersNpiGetCallback);
+            &SWGProvidersApi::getProviderCallback);
 
     worker->execute(&input);
 }
 
 void
-SWGProvidersApi::providersNpiGetCallback(HttpRequestWorker * worker) {
+SWGProvidersApi::getProviderCallback(HttpRequestWorker * worker) {
     QString msg;
     if (worker->error_type == QNetworkReply::NoError) {
         msg = QString("Success! %1 bytes").arg(worker->response.length());
@@ -183,12 +52,56 @@ SWGProvidersApi::providersNpiGetCallback(HttpRequestWorker * worker) {
 
     
         QString json(worker->response);
-    SWGInline_response_200_1* output = static_cast<SWGInline_response_200_1*>(create(json, QString("SWGInline_response_200_1")));
+    SWGProviderResponse* output = static_cast<SWGProviderResponse*>(create(json, QString("SWGProviderResponse")));
     
 
     worker->deleteLater();
 
-    emit providersNpiGetSignal(output);
+    emit getProviderSignal(output);
+    
+}
+void
+SWGProvidersApi::getProviders(SWGRequestProvidersSearch body) {
+    QString fullPath;
+    fullPath.append(this->host).append(this->basePath).append("/providers/search");
+
+
+
+    HttpRequestWorker *worker = new HttpRequestWorker();
+    HttpRequestInput input(fullPath, "POST");
+
+    
+    QString output = body.asJson();
+    input.request_body.append(output);
+    
+
+
+    connect(worker,
+            &HttpRequestWorker::on_execution_finished,
+            this,
+            &SWGProvidersApi::getProvidersCallback);
+
+    worker->execute(&input);
+}
+
+void
+SWGProvidersApi::getProvidersCallback(HttpRequestWorker * worker) {
+    QString msg;
+    if (worker->error_type == QNetworkReply::NoError) {
+        msg = QString("Success! %1 bytes").arg(worker->response.length());
+    }
+    else {
+        msg = "Error: " + worker->error_str;
+    }
+
+    
+        QString json(worker->response);
+    SWGProvidersSearchResponse* output = static_cast<SWGProvidersSearchResponse*>(create(json, QString("SWGProvidersSearchResponse")));
+    
+
+    worker->deleteLater();
+
+    emit getProvidersSignal(output);
     
 }
 } /* namespace Swagger */

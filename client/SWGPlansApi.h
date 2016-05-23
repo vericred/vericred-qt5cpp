@@ -3,8 +3,8 @@
 
 #include "SWGHttpRequest.h"
 
-#include "SWGPlan.h"
-#include "SWGQuery.h"
+#include "SWGRequestPlanFind.h"
+#include "SWGPlanSearchResponse.h"
 
 #include <QObject>
 
@@ -21,13 +21,13 @@ public:
     QString host;
     QString basePath;
 
-    void plansFindPost(SWGQuery query);
+    void findPlans(SWGRequestPlanFind body);
     
 private:
-    void plansFindPostCallback (HttpRequestWorker * worker);
+    void findPlansCallback (HttpRequestWorker * worker);
     
 signals:
-    void plansFindPostSignal(QList<SWGPlan*>* summary);
+    void findPlansSignal(SWGPlanSearchResponse* summary);
     
 };
 }

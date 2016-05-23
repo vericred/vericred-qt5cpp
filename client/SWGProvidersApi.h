@@ -4,8 +4,9 @@
 #include "SWGHttpRequest.h"
 
 #include <QString>
-#include "SWGInline_response_200.h"
-#include "SWGInline_response_200_1.h"
+#include "SWGProviderResponse.h"
+#include "SWGRequestProvidersSearch.h"
+#include "SWGProvidersSearchResponse.h"
 
 #include <QObject>
 
@@ -22,16 +23,16 @@ public:
     QString host;
     QString basePath;
 
-    void providersGet(QString* searchTerm, QString* zipCode, QString* acceptsInsurance, QList<QString*>* hiosIds, QString* page, QString* perPage, QString* radius);
-    void providersNpiGet(QString* npi);
+    void getProvider(QString* npi, QString* vericredApiKey);
+    void getProviders(SWGRequestProvidersSearch body);
     
 private:
-    void providersGetCallback (HttpRequestWorker * worker);
-    void providersNpiGetCallback (HttpRequestWorker * worker);
+    void getProviderCallback (HttpRequestWorker * worker);
+    void getProvidersCallback (HttpRequestWorker * worker);
     
 signals:
-    void providersGetSignal(SWGInline_response_200* summary);
-    void providersNpiGetSignal(SWGInline_response_200_1* summary);
+    void getProviderSignal(SWGProviderResponse* summary);
+    void getProvidersSignal(SWGProvidersSearchResponse* summary);
     
 };
 }

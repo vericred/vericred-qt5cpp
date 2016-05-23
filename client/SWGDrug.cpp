@@ -26,21 +26,29 @@ SWGDrug::~SWGDrug() {
 
 void
 SWGDrug::init() {
-    ndc = new QString("");
+    id = new QString("");
 proprietary_name = new QString("");
 non_proprietary_name = new QString("");
+drug_package_ids = new QList<QString*>();
 }
 
 void
 SWGDrug::cleanup() {
-    if(ndc != NULL) {
-        delete ndc;
+    if(id != NULL) {
+        delete id;
     }
 if(proprietary_name != NULL) {
         delete proprietary_name;
     }
 if(non_proprietary_name != NULL) {
         delete non_proprietary_name;
+    }
+if(drug_package_ids != NULL) {
+        QList<QString*>* arr = drug_package_ids;
+        foreach(QString* o, *arr) {
+            delete o;
+        }
+        delete drug_package_ids;
     }
 }
 
@@ -55,9 +63,10 @@ SWGDrug::fromJson(QString &json) {
 
 void
 SWGDrug::fromJsonObject(QJsonObject &pJson) {
-    setValue(&ndc, pJson["ndc"], "QString", "QString");
+    setValue(&id, pJson["id"], "QString", "QString");
 setValue(&proprietary_name, pJson["proprietary_name"], "QString", "QString");
 setValue(&non_proprietary_name, pJson["non_proprietary_name"], "QString", "QString");
+setValue(&drug_package_ids, pJson["drug_package_ids"], "QList", "QString");
 }
 
 QString
@@ -75,7 +84,7 @@ SWGDrug::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     
     
-    toJsonValue(QString("ndc"), ndc, obj, QString("QString"));
+    toJsonValue(QString("id"), id, obj, QString("QString"));
     
         
 
@@ -89,16 +98,24 @@ SWGDrug::asJsonObject() {
     
         
 
+    
+    QList<QString*>* drug_package_idsList = drug_package_ids;
+    QJsonArray drug_package_idsJsonArray;
+    toJsonArray((QList<void*>*)drug_package_ids, &drug_package_idsJsonArray, "drug_package_ids", "QString");
+
+    obj->insert("drug_package_ids", drug_package_idsJsonArray);
+    
+
     return obj;
 }
 
 QString*
-SWGDrug::getNdc() {
-    return ndc;
+SWGDrug::getId() {
+    return id;
 }
 void
-SWGDrug::setNdc(QString* ndc) {
-    this->ndc = ndc;
+SWGDrug::setId(QString* id) {
+    this->id = id;
 }
 
 QString*
@@ -117,6 +134,15 @@ SWGDrug::getNonProprietaryName() {
 void
 SWGDrug::setNonProprietaryName(QString* non_proprietary_name) {
     this->non_proprietary_name = non_proprietary_name;
+}
+
+QList<QString*>*
+SWGDrug::getDrugPackageIds() {
+    return drug_package_ids;
+}
+void
+SWGDrug::setDrugPackageIds(QList<QString*>* drug_package_ids) {
+    this->drug_package_ids = drug_package_ids;
 }
 
 
