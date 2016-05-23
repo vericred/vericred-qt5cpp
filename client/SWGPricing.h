@@ -11,6 +11,8 @@
 
 
 #include "QDate.h"
+#include "SWGNumber.h"
+#include <QString>
 
 #include "SWGObject.h"
 
@@ -38,15 +40,33 @@ QDate* getExpirationDate();
     void setExpirationDate(QDate* expiration_date);
 qint32 getPlanId();
     void setPlanId(qint32 plan_id);
-qint32 getRatingAreaId();
-    void setRatingAreaId(qint32 rating_area_id);
+SWGNumber* getPremiumChildOnly();
+    void setPremiumChildOnly(SWGNumber* premium_child_only);
+SWGNumber* getPremiumFamily();
+    void setPremiumFamily(SWGNumber* premium_family);
+SWGNumber* getPremiumSingle();
+    void setPremiumSingle(SWGNumber* premium_single);
+SWGNumber* getPremiumSingleAndChildren();
+    void setPremiumSingleAndChildren(SWGNumber* premium_single_and_children);
+SWGNumber* getPremiumSingleAndSpouse();
+    void setPremiumSingleAndSpouse(SWGNumber* premium_single_and_spouse);
+SWGNumber* getPremiumSingleSmoker();
+    void setPremiumSingleSmoker(SWGNumber* premium_single_smoker);
+QString* getRatingAreaId();
+    void setRatingAreaId(QString* rating_area_id);
 
 private:
     qint32 age;
 QDate* effective_date;
 QDate* expiration_date;
 qint32 plan_id;
-qint32 rating_area_id;
+SWGNumber* premium_child_only;
+SWGNumber* premium_family;
+SWGNumber* premium_single;
+SWGNumber* premium_single_and_children;
+SWGNumber* premium_single_and_spouse;
+SWGNumber* premium_single_smoker;
+QString* rating_area_id;
 };
 
 } /* namespace Swagger */

@@ -4,7 +4,7 @@
 #include "SWGHttpRequest.h"
 
 #include <QString>
-#include "SWGInline_response_200_2.h"
+#include "SWGZipCountyResponse.h"
 
 #include <QObject>
 
@@ -21,13 +21,13 @@ public:
     QString host;
     QString basePath;
 
-    void zipCountiesGet(QString* zipPrefix);
+    void getZipCounties(QString* zipPrefix, QString* vericredApiKey);
     
 private:
-    void zipCountiesGetCallback (HttpRequestWorker * worker);
+    void getZipCountiesCallback (HttpRequestWorker * worker);
     
 signals:
-    void zipCountiesGetSignal(SWGInline_response_200_2* summary);
+    void getZipCountiesSignal(SWGZipCountyResponse* summary);
     
 };
 }

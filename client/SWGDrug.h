@@ -10,6 +10,7 @@
 #include <QJsonObject>
 
 
+#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -30,17 +31,20 @@ public:
     void fromJsonObject(QJsonObject &json);
     SWGDrug* fromJson(QString &jsonString);
 
-    QString* getNdc();
-    void setNdc(QString* ndc);
+    QString* getId();
+    void setId(QString* id);
 QString* getProprietaryName();
     void setProprietaryName(QString* proprietary_name);
 QString* getNonProprietaryName();
     void setNonProprietaryName(QString* non_proprietary_name);
+QList<QString*>* getDrugPackageIds();
+    void setDrugPackageIds(QList<QString*>* drug_package_ids);
 
 private:
-    QString* ndc;
+    QString* id;
 QString* proprietary_name;
 QString* non_proprietary_name;
+QList<QString*>* drug_package_ids;
 };
 
 } /* namespace Swagger */

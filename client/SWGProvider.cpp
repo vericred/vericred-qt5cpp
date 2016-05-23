@@ -35,8 +35,11 @@ city = new QString("");
 email = new QString("");
 gender = new QString("");
 first_name = new QString("");
+hios_ids = new QList<QString*>();
 id = NULL;
 last_name = new QString("");
+latitude = 0.0;
+longitude = 0.0;
 middle_name = new QString("");
 personal_phone = new QString("");
 phone = new QString("");
@@ -71,9 +74,22 @@ if(gender != NULL) {
 if(first_name != NULL) {
         delete first_name;
     }
+if(hios_ids != NULL) {
+        QList<QString*>* arr = hios_ids;
+        foreach(QString* o, *arr) {
+            delete o;
+        }
+        delete hios_ids;
+    }
 
 if(last_name != NULL) {
         delete last_name;
+    }
+if(latitude != NULL) {
+        delete latitude;
+    }
+if(longitude != NULL) {
+        delete longitude;
     }
 if(middle_name != NULL) {
         delete middle_name;
@@ -134,8 +150,11 @@ setValue(&city, pJson["city"], "QString", "QString");
 setValue(&email, pJson["email"], "QString", "QString");
 setValue(&gender, pJson["gender"], "QString", "QString");
 setValue(&first_name, pJson["first_name"], "QString", "QString");
+setValue(&hios_ids, pJson["hios_ids"], "QList", "QString");
 setValue(&id, pJson["id"], "qint32", "");
 setValue(&last_name, pJson["last_name"], "QString", "QString");
+setValue(&latitude, pJson["latitude"], "SWGNumber", "SWGNumber");
+setValue(&longitude, pJson["longitude"], "SWGNumber", "SWGNumber");
 setValue(&middle_name, pJson["middle_name"], "QString", "QString");
 setValue(&personal_phone, pJson["personal_phone"], "QString", "QString");
 setValue(&phone, pJson["phone"], "QString", "QString");
@@ -189,10 +208,28 @@ obj->insert("accepting_referral_patients", QJsonValue(accepting_referral_patient
     toJsonValue(QString("first_name"), first_name, obj, QString("QString"));
     
         
+
+    
+    QList<QString*>* hios_idsList = hios_ids;
+    QJsonArray hios_idsJsonArray;
+    toJsonArray((QList<void*>*)hios_ids, &hios_idsJsonArray, "hios_ids", "QString");
+
+    obj->insert("hios_ids", hios_idsJsonArray);
+    
 obj->insert("id", QJsonValue(id));
 
     
     toJsonValue(QString("last_name"), last_name, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("latitude"), latitude, obj, QString("SWGNumber"));
+    
+        
+
+    
+    toJsonValue(QString("longitude"), longitude, obj, QString("SWGNumber"));
     
         
 
@@ -341,6 +378,15 @@ SWGProvider::setFirstName(QString* first_name) {
     this->first_name = first_name;
 }
 
+QList<QString*>*
+SWGProvider::getHiosIds() {
+    return hios_ids;
+}
+void
+SWGProvider::setHiosIds(QList<QString*>* hios_ids) {
+    this->hios_ids = hios_ids;
+}
+
 qint32
 SWGProvider::getId() {
     return id;
@@ -357,6 +403,24 @@ SWGProvider::getLastName() {
 void
 SWGProvider::setLastName(QString* last_name) {
     this->last_name = last_name;
+}
+
+SWGNumber*
+SWGProvider::getLatitude() {
+    return latitude;
+}
+void
+SWGProvider::setLatitude(SWGNumber* latitude) {
+    this->latitude = latitude;
+}
+
+SWGNumber*
+SWGProvider::getLongitude() {
+    return longitude;
+}
+void
+SWGProvider::setLongitude(SWGNumber* longitude) {
+    this->longitude = longitude;
 }
 
 QString*
