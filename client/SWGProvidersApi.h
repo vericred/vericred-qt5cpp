@@ -3,8 +3,8 @@
 
 #include "SWGHttpRequest.h"
 
+#include "SWGProvider.h"
 #include <QString>
-#include "SWGProviderResponse.h"
 #include "SWGRequestProvidersSearch.h"
 #include "SWGProvidersSearchResponse.h"
 
@@ -31,7 +31,7 @@ private:
     void getProvidersCallback (HttpRequestWorker * worker);
     
 signals:
-    void getProviderSignal(SWGProviderResponse* summary);
+    void getProviderSignal(SWGProvider* summary);
     void getProvidersSignal(SWGProvidersSearchResponse* summary);
     
 };
