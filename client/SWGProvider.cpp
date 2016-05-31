@@ -41,6 +41,7 @@ last_name = new QString("");
 latitude = 0.0;
 longitude = 0.0;
 middle_name = new QString("");
+network_ids = new QList<qint32>();
 personal_phone = new QString("");
 phone = new QString("");
 presentation_name = new QString("");
@@ -94,6 +95,7 @@ if(longitude != NULL) {
 if(middle_name != NULL) {
         delete middle_name;
     }
+
 if(personal_phone != NULL) {
         delete personal_phone;
     }
@@ -156,6 +158,7 @@ setValue(&last_name, pJson["last_name"], "QString", "QString");
 setValue(&latitude, pJson["latitude"], "SWGNumber", "SWGNumber");
 setValue(&longitude, pJson["longitude"], "SWGNumber", "SWGNumber");
 setValue(&middle_name, pJson["middle_name"], "QString", "QString");
+setValue(&network_ids, pJson["network_ids"], "QList", "");
 setValue(&personal_phone, pJson["personal_phone"], "QString", "QString");
 setValue(&phone, pJson["phone"], "QString", "QString");
 setValue(&presentation_name, pJson["presentation_name"], "QString", "QString");
@@ -237,6 +240,7 @@ obj->insert("id", QJsonValue(id));
     toJsonValue(QString("middle_name"), middle_name, obj, QString("QString"));
     
         
+obj->insert("network_ids", QJsonValue(network_ids));
 
     
     toJsonValue(QString("personal_phone"), personal_phone, obj, QString("QString"));
@@ -430,6 +434,15 @@ SWGProvider::getMiddleName() {
 void
 SWGProvider::setMiddleName(QString* middle_name) {
     this->middle_name = middle_name;
+}
+
+QList<qint32>*
+SWGProvider::getNetworkIds() {
+    return network_ids;
+}
+void
+SWGProvider::setNetworkIds(QList<qint32>* network_ids) {
+    this->network_ids = network_ids;
 }
 
 QString*

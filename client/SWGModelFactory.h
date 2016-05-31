@@ -14,6 +14,8 @@
 #include "SWGDrugPackage.h"
 #include "SWGDrugSearchResponse.h"
 #include "SWGMeta.h"
+#include "SWGNetwork.h"
+#include "SWGNetworkSearchResponse.h"
 #include "SWGPlan.h"
 #include "SWGPlanCounty.h"
 #include "SWGPlanCountyBulk.h"
@@ -71,6 +73,12 @@ namespace Swagger {
     }
     if(QString("SWGMeta").compare(type) == 0) {
       return new SWGMeta();
+    }
+    if(QString("SWGNetwork").compare(type) == 0) {
+      return new SWGNetwork();
+    }
+    if(QString("SWGNetworkSearchResponse").compare(type) == 0) {
+      return new SWGNetworkSearchResponse();
     }
     if(QString("SWGPlan").compare(type) == 0) {
       return new SWGPlan();

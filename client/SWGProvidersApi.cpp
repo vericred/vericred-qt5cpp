@@ -52,7 +52,7 @@ SWGProvidersApi::getProviderCallback(HttpRequestWorker * worker) {
 
     
         QString json(worker->response);
-    SWGProviderResponse* output = static_cast<SWGProviderResponse*>(create(json, QString("SWGProviderResponse")));
+    SWGProvider* output = static_cast<SWGProvider*>(create(json, QString("SWGProvider")));
     
 
     worker->deleteLater();
