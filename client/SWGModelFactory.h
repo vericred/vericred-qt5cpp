@@ -23,6 +23,7 @@
 #include "SWGPlanSearchResult.h"
 #include "SWGPricing.h"
 #include "SWGProvider.h"
+#include "SWGProviderShowResponse.h"
 #include "SWGProvidersSearchResponse.h"
 #include "SWGRatingArea.h"
 #include "SWGRequestPlanFind.h"
@@ -100,6 +101,9 @@ namespace Swagger {
     }
     if(QString("SWGProvider").compare(type) == 0) {
       return new SWGProvider();
+    }
+    if(QString("SWGProviderShowResponse").compare(type) == 0) {
+      return new SWGProviderShowResponse();
     }
     if(QString("SWGProvidersSearchResponse").compare(type) == 0) {
       return new SWGProvidersSearchResponse();
