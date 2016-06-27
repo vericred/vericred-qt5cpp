@@ -22,8 +22,8 @@ public:
     QString host;
     QString basePath;
 
-    void getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode, QString* vericredApiKey);
-    void listDrugs(QString* searchTerm, QString* vericredApiKey);
+    void getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode);
+    void listDrugs(QString* searchTerm);
     
 private:
     void getDrugCoveragesCallback (HttpRequestWorker * worker);

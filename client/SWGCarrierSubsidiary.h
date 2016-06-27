@@ -34,10 +34,13 @@ public:
     void setId(qint32 id);
 QString* getName();
     void setName(QString* name);
+QString* getAlternateName();
+    void setAlternateName(QString* alternate_name);
 
 private:
     qint32 id;
 QString* name;
+QString* alternate_name;
 };
 
 } /* namespace Swagger */

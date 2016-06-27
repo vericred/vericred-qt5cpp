@@ -34,6 +34,9 @@ household_income = NULL;
 household_size = NULL;
 market = new QString("");
 providers = new QList<SWGRequestPlanFindProvider*>();
+page = NULL;
+per_page = NULL;
+sort = new QString("");
 zip_code = new QString("");
 }
 
@@ -71,6 +74,11 @@ if(providers != NULL) {
         }
         delete providers;
     }
+
+
+if(sort != NULL) {
+        delete sort;
+    }
 if(zip_code != NULL) {
         delete zip_code;
     }
@@ -95,6 +103,9 @@ setValue(&household_income, pJson["household_income"], "qint32", "");
 setValue(&household_size, pJson["household_size"], "qint32", "");
 setValue(&market, pJson["market"], "QString", "QString");
 setValue(&providers, pJson["providers"], "QList", "SWGRequestPlanFindProvider");
+setValue(&page, pJson["page"], "qint32", "");
+setValue(&per_page, pJson["per_page"], "qint32", "");
+setValue(&sort, pJson["sort"], "QString", "QString");
 setValue(&zip_code, pJson["zip_code"], "QString", "QString");
 }
 
@@ -152,6 +163,13 @@ obj->insert("household_size", QJsonValue(household_size));
 
     obj->insert("providers", providersJsonArray);
     
+obj->insert("page", QJsonValue(page));
+obj->insert("per_page", QJsonValue(per_page));
+
+    
+    toJsonValue(QString("sort"), sort, obj, QString("QString"));
+    
+        
 
     
     toJsonValue(QString("zip_code"), zip_code, obj, QString("QString"));
@@ -231,6 +249,33 @@ SWGRequestPlanFind::getProviders() {
 void
 SWGRequestPlanFind::setProviders(QList<SWGRequestPlanFindProvider*>* providers) {
     this->providers = providers;
+}
+
+qint32
+SWGRequestPlanFind::getPage() {
+    return page;
+}
+void
+SWGRequestPlanFind::setPage(qint32 page) {
+    this->page = page;
+}
+
+qint32
+SWGRequestPlanFind::getPerPage() {
+    return per_page;
+}
+void
+SWGRequestPlanFind::setPerPage(qint32 per_page) {
+    this->per_page = per_page;
+}
+
+QString*
+SWGRequestPlanFind::getSort() {
+    return sort;
+}
+void
+SWGRequestPlanFind::setSort(QString* sort) {
+    this->sort = sort;
 }
 
 QString*

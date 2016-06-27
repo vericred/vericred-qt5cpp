@@ -16,7 +16,7 @@ SWGDrugsApi::SWGDrugsApi(QString host, QString basePath) {
 }
 
 void
-SWGDrugsApi::getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode, QString* vericredApiKey) {
+SWGDrugsApi::getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/drug_packages/{ndc_package_code}/coverages");
 
@@ -46,7 +46,6 @@ SWGDrugsApi::getDrugCoverages(QString* ndcPackageCode, QString* audience, QStrin
     
 
 
-    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,
@@ -77,7 +76,7 @@ SWGDrugsApi::getDrugCoveragesCallback(HttpRequestWorker * worker) {
     
 }
 void
-SWGDrugsApi::listDrugs(QString* searchTerm, QString* vericredApiKey) {
+SWGDrugsApi::listDrugs(QString* searchTerm) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/drugs");
 
@@ -97,7 +96,6 @@ SWGDrugsApi::listDrugs(QString* searchTerm, QString* vericredApiKey) {
     
 
 
-    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,

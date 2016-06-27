@@ -50,6 +50,12 @@ QString* getMarket();
     void setMarket(QString* market);
 QList<SWGRequestPlanFindProvider*>* getProviders();
     void setProviders(QList<SWGRequestPlanFindProvider*>* providers);
+qint32 getPage();
+    void setPage(qint32 page);
+qint32 getPerPage();
+    void setPerPage(qint32 per_page);
+QString* getSort();
+    void setSort(QString* sort);
 QString* getZipCode();
     void setZipCode(QString* zip_code);
 
@@ -62,6 +68,9 @@ qint32 household_income;
 qint32 household_size;
 QString* market;
 QList<SWGRequestPlanFindProvider*>* providers;
+qint32 page;
+qint32 per_page;
+QString* sort;
 QString* zip_code;
 };
 

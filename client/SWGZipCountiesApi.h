@@ -21,7 +21,7 @@ public:
     QString host;
     QString basePath;
 
-    void getZipCounties(QString* zipPrefix, QString* vericredApiKey);
+    void getZipCounties(QString* zipPrefix);
     
 private:
     void getZipCountiesCallback (HttpRequestWorker * worker);

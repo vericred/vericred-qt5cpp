@@ -16,7 +16,7 @@ SWGProvidersApi::SWGProvidersApi(QString host, QString basePath) {
 }
 
 void
-SWGProvidersApi::getProvider(QString* npi, QString* vericredApiKey) {
+SWGProvidersApi::getProvider(QString* npi) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/providers/{npi}");
 
@@ -30,7 +30,6 @@ SWGProvidersApi::getProvider(QString* npi, QString* vericredApiKey) {
     
 
 
-    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,

@@ -23,7 +23,7 @@ public:
     QString host;
     QString basePath;
 
-    void getProvider(QString* npi, QString* vericredApiKey);
+    void getProvider(QString* npi);
     void getProviders(SWGRequestProvidersSearch body);
     
 private:

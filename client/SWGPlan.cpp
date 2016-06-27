@@ -27,6 +27,7 @@ SWGPlan::~SWGPlan() {
 void
 SWGPlan::init() {
     adult_dental = false;
+age29_rider = false;
 ambulance = new QString("");
 benefits_summary_url = new QString("");
 buy_link = new QString("");
@@ -37,6 +38,7 @@ child_eye_exam = new QString("");
 customer_service_phone_number = new QString("");
 durable_medical_equipment = new QString("");
 diagnostic_test = new QString("");
+dp_rider = false;
 drug_formulary_url = new QString("");
 effective_date = new QString("");
 expiration_date = new QString("");
@@ -45,6 +47,7 @@ family_drug_deductible = new QString("");
 family_drug_moop = new QString("");
 family_medical_deductible = new QString("");
 family_medical_moop = new QString("");
+fp_rider = false;
 generic_drugs = new QString("");
 habilitation_services = new QString("");
 hios_issuer_id = new QString("");
@@ -93,6 +96,7 @@ urgent_care = new QString("");
 void
 SWGPlan::cleanup() {
     
+
 if(ambulance != NULL) {
         delete ambulance;
     }
@@ -121,6 +125,7 @@ if(durable_medical_equipment != NULL) {
 if(diagnostic_test != NULL) {
         delete diagnostic_test;
     }
+
 if(drug_formulary_url != NULL) {
         delete drug_formulary_url;
     }
@@ -145,6 +150,7 @@ if(family_medical_deductible != NULL) {
 if(family_medical_moop != NULL) {
         delete family_medical_moop;
     }
+
 if(generic_drugs != NULL) {
         delete generic_drugs;
     }
@@ -276,6 +282,7 @@ SWGPlan::fromJson(QString &json) {
 void
 SWGPlan::fromJsonObject(QJsonObject &pJson) {
     setValue(&adult_dental, pJson["adult_dental"], "bool", "");
+setValue(&age29_rider, pJson["age29_rider"], "bool", "");
 setValue(&ambulance, pJson["ambulance"], "QString", "QString");
 setValue(&benefits_summary_url, pJson["benefits_summary_url"], "QString", "QString");
 setValue(&buy_link, pJson["buy_link"], "QString", "QString");
@@ -286,6 +293,7 @@ setValue(&child_eye_exam, pJson["child_eye_exam"], "QString", "QString");
 setValue(&customer_service_phone_number, pJson["customer_service_phone_number"], "QString", "QString");
 setValue(&durable_medical_equipment, pJson["durable_medical_equipment"], "QString", "QString");
 setValue(&diagnostic_test, pJson["diagnostic_test"], "QString", "QString");
+setValue(&dp_rider, pJson["dp_rider"], "bool", "");
 setValue(&drug_formulary_url, pJson["drug_formulary_url"], "QString", "QString");
 setValue(&effective_date, pJson["effective_date"], "QString", "QString");
 setValue(&expiration_date, pJson["expiration_date"], "QString", "QString");
@@ -294,6 +302,7 @@ setValue(&family_drug_deductible, pJson["family_drug_deductible"], "QString", "Q
 setValue(&family_drug_moop, pJson["family_drug_moop"], "QString", "QString");
 setValue(&family_medical_deductible, pJson["family_medical_deductible"], "QString", "QString");
 setValue(&family_medical_moop, pJson["family_medical_moop"], "QString", "QString");
+setValue(&fp_rider, pJson["fp_rider"], "bool", "");
 setValue(&generic_drugs, pJson["generic_drugs"], "QString", "QString");
 setValue(&habilitation_services, pJson["habilitation_services"], "QString", "QString");
 setValue(&hios_issuer_id, pJson["hios_issuer_id"], "QString", "QString");
@@ -353,6 +362,7 @@ QJsonObject*
 SWGPlan::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     obj->insert("adult_dental", QJsonValue(adult_dental));
+obj->insert("age29_rider", QJsonValue(age29_rider));
 
     
     toJsonValue(QString("ambulance"), ambulance, obj, QString("QString"));
@@ -399,6 +409,7 @@ obj->insert("child_dental", QJsonValue(child_dental));
     toJsonValue(QString("diagnostic_test"), diagnostic_test, obj, QString("QString"));
     
         
+obj->insert("dp_rider", QJsonValue(dp_rider));
 
     
     toJsonValue(QString("drug_formulary_url"), drug_formulary_url, obj, QString("QString"));
@@ -439,6 +450,7 @@ obj->insert("child_dental", QJsonValue(child_dental));
     toJsonValue(QString("family_medical_moop"), family_medical_moop, obj, QString("QString"));
     
         
+obj->insert("fp_rider", QJsonValue(fp_rider));
 
     
     toJsonValue(QString("generic_drugs"), generic_drugs, obj, QString("QString"));
@@ -643,6 +655,15 @@ SWGPlan::setAdultDental(bool adult_dental) {
     this->adult_dental = adult_dental;
 }
 
+bool
+SWGPlan::getAge29Rider() {
+    return age29_rider;
+}
+void
+SWGPlan::setAge29Rider(bool age29_rider) {
+    this->age29_rider = age29_rider;
+}
+
 QString*
 SWGPlan::getAmbulance() {
     return ambulance;
@@ -733,6 +754,15 @@ SWGPlan::setDiagnosticTest(QString* diagnostic_test) {
     this->diagnostic_test = diagnostic_test;
 }
 
+bool
+SWGPlan::getDpRider() {
+    return dp_rider;
+}
+void
+SWGPlan::setDpRider(bool dp_rider) {
+    this->dp_rider = dp_rider;
+}
+
 QString*
 SWGPlan::getDrugFormularyUrl() {
     return drug_formulary_url;
@@ -803,6 +833,15 @@ SWGPlan::getFamilyMedicalMoop() {
 void
 SWGPlan::setFamilyMedicalMoop(QString* family_medical_moop) {
     this->family_medical_moop = family_medical_moop;
+}
+
+bool
+SWGPlan::getFpRider() {
+    return fp_rider;
+}
+void
+SWGPlan::setFpRider(bool fp_rider) {
+    this->fp_rider = fp_rider;
 }
 
 QString*

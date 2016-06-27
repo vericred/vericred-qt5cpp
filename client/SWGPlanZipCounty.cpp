@@ -1,5 +1,5 @@
 
-#include "SWGPlanCountyBulk.h"
+#include "SWGPlanZipCounty.h"
 
 #include "SWGHelpers.h"
 
@@ -11,33 +11,35 @@
 namespace Swagger {
 
 
-SWGPlanCountyBulk::SWGPlanCountyBulk(QString* json) {
+SWGPlanZipCounty::SWGPlanZipCounty(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGPlanCountyBulk::SWGPlanCountyBulk() {
+SWGPlanZipCounty::SWGPlanZipCounty() {
     init();
 }
 
-SWGPlanCountyBulk::~SWGPlanCountyBulk() {
+SWGPlanZipCounty::~SWGPlanZipCounty() {
     this->cleanup();
 }
 
 void
-SWGPlanCountyBulk::init() {
+SWGPlanZipCounty::init() {
     plan_id = NULL;
 county_id = NULL;
+zip_code_id = NULL;
 }
 
 void
-SWGPlanCountyBulk::cleanup() {
+SWGPlanZipCounty::cleanup() {
     
+
 
 }
 
-SWGPlanCountyBulk*
-SWGPlanCountyBulk::fromJson(QString &json) {
+SWGPlanZipCounty*
+SWGPlanZipCounty::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -46,13 +48,14 @@ SWGPlanCountyBulk::fromJson(QString &json) {
 }
 
 void
-SWGPlanCountyBulk::fromJsonObject(QJsonObject &pJson) {
+SWGPlanZipCounty::fromJsonObject(QJsonObject &pJson) {
     setValue(&plan_id, pJson["plan_id"], "qint32", "");
 setValue(&county_id, pJson["county_id"], "qint32", "");
+setValue(&zip_code_id, pJson["zip_code_id"], "qint32", "");
 }
 
 QString
-SWGPlanCountyBulk::asJson ()
+SWGPlanZipCounty::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -62,30 +65,40 @@ SWGPlanCountyBulk::asJson ()
 }
 
 QJsonObject*
-SWGPlanCountyBulk::asJsonObject() {
+SWGPlanZipCounty::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     obj->insert("plan_id", QJsonValue(plan_id));
 obj->insert("county_id", QJsonValue(county_id));
+obj->insert("zip_code_id", QJsonValue(zip_code_id));
 
     return obj;
 }
 
 qint32
-SWGPlanCountyBulk::getPlanId() {
+SWGPlanZipCounty::getPlanId() {
     return plan_id;
 }
 void
-SWGPlanCountyBulk::setPlanId(qint32 plan_id) {
+SWGPlanZipCounty::setPlanId(qint32 plan_id) {
     this->plan_id = plan_id;
 }
 
 qint32
-SWGPlanCountyBulk::getCountyId() {
+SWGPlanZipCounty::getCountyId() {
     return county_id;
 }
 void
-SWGPlanCountyBulk::setCountyId(qint32 county_id) {
+SWGPlanZipCounty::setCountyId(qint32 county_id) {
     this->county_id = county_id;
+}
+
+qint32
+SWGPlanZipCounty::getZipCodeId() {
+    return zip_code_id;
+}
+void
+SWGPlanZipCounty::setZipCodeId(qint32 zip_code_id) {
+    this->zip_code_id = zip_code_id;
 }
 
 

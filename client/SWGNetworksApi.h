@@ -21,7 +21,7 @@ public:
     QString host;
     QString basePath;
 
-    void listNetworks(QString* carrierId);
+    void listNetworks(QString* carrierId, qint32 page, qint32 perPage);
     
 private:
     void listNetworksCallback (HttpRequestWorker * worker);

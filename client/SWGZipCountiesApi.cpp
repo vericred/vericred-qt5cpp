@@ -16,7 +16,7 @@ SWGZipCountiesApi::SWGZipCountiesApi(QString host, QString basePath) {
 }
 
 void
-SWGZipCountiesApi::getZipCounties(QString* zipPrefix, QString* vericredApiKey) {
+SWGZipCountiesApi::getZipCounties(QString* zipPrefix) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/zip_counties");
 
@@ -36,7 +36,6 @@ SWGZipCountiesApi::getZipCounties(QString* zipPrefix, QString* vericredApiKey) {
     
 
 
-    // TODO: add header support
 
     connect(worker,
             &HttpRequestWorker::on_execution_finished,
