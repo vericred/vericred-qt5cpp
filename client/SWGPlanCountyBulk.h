@@ -29,16 +29,13 @@ public:
     void fromJsonObject(QJsonObject &json);
     SWGPlanCountyBulk* fromJson(QString &jsonString);
 
-    qint32 getId();
-    void setId(qint32 id);
-qint32 getPlanId();
+    qint32 getPlanId();
     void setPlanId(qint32 plan_id);
 qint32 getCountyId();
     void setCountyId(qint32 county_id);
 
 private:
-    qint32 id;
-qint32 plan_id;
+    qint32 plan_id;
 qint32 county_id;
 };
 

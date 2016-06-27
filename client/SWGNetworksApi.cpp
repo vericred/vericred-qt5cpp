@@ -16,7 +16,7 @@ SWGNetworksApi::SWGNetworksApi(QString host, QString basePath) {
 }
 
 void
-SWGNetworksApi::listNetworks(QString* carrierId) {
+SWGNetworksApi::listNetworks(QString* carrierId, qint32 page, qint32 perPage) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/networks");
 
@@ -28,6 +28,22 @@ SWGNetworksApi::listNetworks(QString* carrierId) {
     fullPath.append(QUrl::toPercentEncoding("carrierId"))
         .append("=")
         .append(QUrl::toPercentEncoding(stringValue(carrierId)));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("page"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(page)));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("perPage"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(perPage)));
 
 
     HttpRequestWorker *worker = new HttpRequestWorker();

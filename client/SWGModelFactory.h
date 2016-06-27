@@ -21,6 +21,7 @@
 #include "SWGPlanCountyBulk.h"
 #include "SWGPlanSearchResponse.h"
 #include "SWGPlanSearchResult.h"
+#include "SWGPlanZipCounty.h"
 #include "SWGPricing.h"
 #include "SWGProvider.h"
 #include "SWGProviderShowResponse.h"
@@ -95,6 +96,9 @@ namespace Swagger {
     }
     if(QString("SWGPlanSearchResult").compare(type) == 0) {
       return new SWGPlanSearchResult();
+    }
+    if(QString("SWGPlanZipCounty").compare(type) == 0) {
+      return new SWGPlanZipCounty();
     }
     if(QString("SWGPricing").compare(type) == 0) {
       return new SWGPricing();

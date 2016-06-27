@@ -28,6 +28,7 @@ void
 SWGCarrierSubsidiary::init() {
     id = NULL;
 name = new QString("");
+alternate_name = new QString("");
 }
 
 void
@@ -35,6 +36,9 @@ SWGCarrierSubsidiary::cleanup() {
     
 if(name != NULL) {
         delete name;
+    }
+if(alternate_name != NULL) {
+        delete alternate_name;
     }
 }
 
@@ -51,6 +55,7 @@ void
 SWGCarrierSubsidiary::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "qint32", "");
 setValue(&name, pJson["name"], "QString", "QString");
+setValue(&alternate_name, pJson["alternate_name"], "QString", "QString");
 }
 
 QString
@@ -73,6 +78,11 @@ SWGCarrierSubsidiary::asJsonObject() {
     
         
 
+    
+    toJsonValue(QString("alternate_name"), alternate_name, obj, QString("QString"));
+    
+        
+
     return obj;
 }
 
@@ -92,6 +102,15 @@ SWGCarrierSubsidiary::getName() {
 void
 SWGCarrierSubsidiary::setName(QString* name) {
     this->name = name;
+}
+
+QString*
+SWGCarrierSubsidiary::getAlternateName() {
+    return alternate_name;
+}
+void
+SWGCarrierSubsidiary::setAlternateName(QString* alternate_name) {
+    this->alternate_name = alternate_name;
 }
 
 

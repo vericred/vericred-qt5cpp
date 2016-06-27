@@ -26,15 +26,13 @@ SWGPlanCounty::~SWGPlanCounty() {
 
 void
 SWGPlanCounty::init() {
-    id = NULL;
-plan_id = NULL;
+    plan_id = NULL;
 county_id = NULL;
 }
 
 void
 SWGPlanCounty::cleanup() {
     
-
 
 }
 
@@ -49,8 +47,7 @@ SWGPlanCounty::fromJson(QString &json) {
 
 void
 SWGPlanCounty::fromJsonObject(QJsonObject &pJson) {
-    setValue(&id, pJson["id"], "qint32", "");
-setValue(&plan_id, pJson["plan_id"], "qint32", "");
+    setValue(&plan_id, pJson["plan_id"], "qint32", "");
 setValue(&county_id, pJson["county_id"], "qint32", "");
 }
 
@@ -67,20 +64,10 @@ SWGPlanCounty::asJson ()
 QJsonObject*
 SWGPlanCounty::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    obj->insert("id", QJsonValue(id));
-obj->insert("plan_id", QJsonValue(plan_id));
+    obj->insert("plan_id", QJsonValue(plan_id));
 obj->insert("county_id", QJsonValue(county_id));
 
     return obj;
-}
-
-qint32
-SWGPlanCounty::getId() {
-    return id;
-}
-void
-SWGPlanCounty::setId(qint32 id) {
-    this->id = id;
 }
 
 qint32
