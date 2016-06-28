@@ -129,142 +129,50 @@ The response would be
  * limitations under the License.
  */
 
+/*
+ * SWGPlanZipCounty.h
+ * 
+ * 
+ */
 
-#include "SWGProvidersSearchResponse.h"
+#ifndef SWGPlanZipCounty_H_
+#define SWGPlanZipCounty_H_
 
-#include "SWGHelpers.h"
+#include <QJsonObject>
 
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QObject>
-#include <QDebug>
+
+
+#include "SWGObject.h"
+
 
 namespace Swagger {
 
+class SWGPlanZipCounty: public SWGObject {
+public:
+    SWGPlanZipCounty();
+    SWGPlanZipCounty(QString* json);
+    virtual ~SWGPlanZipCounty();
+    void init();
+    void cleanup();
 
-SWGProvidersSearchResponse::SWGProvidersSearchResponse(QString* json) {
-    init();
-    this->fromJson(*json);
-}
+    QString asJson ();
+    QJsonObject* asJsonObject();
+    void fromJsonObject(QJsonObject &json);
+    SWGPlanZipCounty* fromJson(QString &jsonString);
 
-SWGProvidersSearchResponse::SWGProvidersSearchResponse() {
-    init();
-}
+    qint32 getPlanId();
+    void setPlanId(qint32 plan_id);
+qint32 getCountyId();
+    void setCountyId(qint32 county_id);
+qint32 getZipCodeId();
+    void setZipCodeId(qint32 zip_code_id);
 
-SWGProvidersSearchResponse::~SWGProvidersSearchResponse() {
-    this->cleanup();
-}
-
-void
-SWGProvidersSearchResponse::init() {
-    meta = new SWGMeta();
-providers = new QList<SWGProvider*>();
-states = new QList<SWGState*>();
-}
-
-void
-SWGProvidersSearchResponse::cleanup() {
-    if(meta != NULL) {
-        delete meta;
-    }
-if(providers != NULL) {
-        QList<SWGProvider*>* arr = providers;
-        foreach(SWGProvider* o, *arr) {
-            delete o;
-        }
-        delete providers;
-    }
-if(states != NULL) {
-        QList<SWGState*>* arr = states;
-        foreach(SWGState* o, *arr) {
-            delete o;
-        }
-        delete states;
-    }
-}
-
-SWGProvidersSearchResponse*
-SWGProvidersSearchResponse::fromJson(QString &json) {
-    QByteArray array (json.toStdString().c_str());
-    QJsonDocument doc = QJsonDocument::fromJson(array);
-    QJsonObject jsonObject = doc.object();
-    this->fromJsonObject(jsonObject);
-    return this;
-}
-
-void
-SWGProvidersSearchResponse::fromJsonObject(QJsonObject &pJson) {
-    setValue(&meta, pJson["meta"], "SWGMeta", "SWGMeta");
-setValue(&providers, pJson["providers"], "QList", "SWGProvider");
-setValue(&states, pJson["states"], "QList", "SWGState");
-}
-
-QString
-SWGProvidersSearchResponse::asJson ()
-{
-    QJsonObject* obj = this->asJsonObject();
-    
-    QJsonDocument doc(*obj);
-    QByteArray bytes = doc.toJson();
-    return QString(bytes);
-}
-
-QJsonObject*
-SWGProvidersSearchResponse::asJsonObject() {
-    QJsonObject* obj = new QJsonObject();
-    
-    
-    toJsonValue(QString("meta"), meta, obj, QString("SWGMeta"));
-    
-        
-
-    
-    QList<SWGProvider*>* providersList = providers;
-    QJsonArray providersJsonArray;
-    toJsonArray((QList<void*>*)providers, &providersJsonArray, "providers", "SWGProvider");
-
-    obj->insert("providers", providersJsonArray);
-    
-
-    
-    QList<SWGState*>* statesList = states;
-    QJsonArray statesJsonArray;
-    toJsonArray((QList<void*>*)states, &statesJsonArray, "states", "SWGState");
-
-    obj->insert("states", statesJsonArray);
-    
-
-    return obj;
-}
-
-SWGMeta*
-SWGProvidersSearchResponse::getMeta() {
-    return meta;
-}
-void
-SWGProvidersSearchResponse::setMeta(SWGMeta* meta) {
-    this->meta = meta;
-}
-
-QList<SWGProvider*>*
-SWGProvidersSearchResponse::getProviders() {
-    return providers;
-}
-void
-SWGProvidersSearchResponse::setProviders(QList<SWGProvider*>* providers) {
-    this->providers = providers;
-}
-
-QList<SWGState*>*
-SWGProvidersSearchResponse::getStates() {
-    return states;
-}
-void
-SWGProvidersSearchResponse::setStates(QList<SWGState*>* states) {
-    this->states = states;
-}
-
-
+private:
+    qint32 plan_id;
+qint32 county_id;
+qint32 zip_code_id;
+};
 
 } /* namespace Swagger */
 
+#endif /* SWGPlanZipCounty_H_ */

@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGProvidersSearchResponse.h"
+#include "SWGPlanZipCounty.h"
 
 #include "SWGHelpers.h"
 
@@ -142,49 +142,35 @@ The response would be
 namespace Swagger {
 
 
-SWGProvidersSearchResponse::SWGProvidersSearchResponse(QString* json) {
+SWGPlanZipCounty::SWGPlanZipCounty(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGProvidersSearchResponse::SWGProvidersSearchResponse() {
+SWGPlanZipCounty::SWGPlanZipCounty() {
     init();
 }
 
-SWGProvidersSearchResponse::~SWGProvidersSearchResponse() {
+SWGPlanZipCounty::~SWGPlanZipCounty() {
     this->cleanup();
 }
 
 void
-SWGProvidersSearchResponse::init() {
-    meta = new SWGMeta();
-providers = new QList<SWGProvider*>();
-states = new QList<SWGState*>();
+SWGPlanZipCounty::init() {
+    plan_id = NULL;
+county_id = NULL;
+zip_code_id = NULL;
 }
 
 void
-SWGProvidersSearchResponse::cleanup() {
-    if(meta != NULL) {
-        delete meta;
-    }
-if(providers != NULL) {
-        QList<SWGProvider*>* arr = providers;
-        foreach(SWGProvider* o, *arr) {
-            delete o;
-        }
-        delete providers;
-    }
-if(states != NULL) {
-        QList<SWGState*>* arr = states;
-        foreach(SWGState* o, *arr) {
-            delete o;
-        }
-        delete states;
-    }
+SWGPlanZipCounty::cleanup() {
+    
+
+
 }
 
-SWGProvidersSearchResponse*
-SWGProvidersSearchResponse::fromJson(QString &json) {
+SWGPlanZipCounty*
+SWGPlanZipCounty::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -193,14 +179,14 @@ SWGProvidersSearchResponse::fromJson(QString &json) {
 }
 
 void
-SWGProvidersSearchResponse::fromJsonObject(QJsonObject &pJson) {
-    setValue(&meta, pJson["meta"], "SWGMeta", "SWGMeta");
-setValue(&providers, pJson["providers"], "QList", "SWGProvider");
-setValue(&states, pJson["states"], "QList", "SWGState");
+SWGPlanZipCounty::fromJsonObject(QJsonObject &pJson) {
+    setValue(&plan_id, pJson["plan_id"], "qint32", "");
+setValue(&county_id, pJson["county_id"], "qint32", "");
+setValue(&zip_code_id, pJson["zip_code_id"], "qint32", "");
 }
 
 QString
-SWGProvidersSearchResponse::asJson ()
+SWGPlanZipCounty::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -210,58 +196,40 @@ SWGProvidersSearchResponse::asJson ()
 }
 
 QJsonObject*
-SWGProvidersSearchResponse::asJsonObject() {
+SWGPlanZipCounty::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    
-    
-    toJsonValue(QString("meta"), meta, obj, QString("SWGMeta"));
-    
-        
-
-    
-    QList<SWGProvider*>* providersList = providers;
-    QJsonArray providersJsonArray;
-    toJsonArray((QList<void*>*)providers, &providersJsonArray, "providers", "SWGProvider");
-
-    obj->insert("providers", providersJsonArray);
-    
-
-    
-    QList<SWGState*>* statesList = states;
-    QJsonArray statesJsonArray;
-    toJsonArray((QList<void*>*)states, &statesJsonArray, "states", "SWGState");
-
-    obj->insert("states", statesJsonArray);
-    
+    obj->insert("plan_id", QJsonValue(plan_id));
+obj->insert("county_id", QJsonValue(county_id));
+obj->insert("zip_code_id", QJsonValue(zip_code_id));
 
     return obj;
 }
 
-SWGMeta*
-SWGProvidersSearchResponse::getMeta() {
-    return meta;
+qint32
+SWGPlanZipCounty::getPlanId() {
+    return plan_id;
 }
 void
-SWGProvidersSearchResponse::setMeta(SWGMeta* meta) {
-    this->meta = meta;
+SWGPlanZipCounty::setPlanId(qint32 plan_id) {
+    this->plan_id = plan_id;
 }
 
-QList<SWGProvider*>*
-SWGProvidersSearchResponse::getProviders() {
-    return providers;
+qint32
+SWGPlanZipCounty::getCountyId() {
+    return county_id;
 }
 void
-SWGProvidersSearchResponse::setProviders(QList<SWGProvider*>* providers) {
-    this->providers = providers;
+SWGPlanZipCounty::setCountyId(qint32 county_id) {
+    this->county_id = county_id;
 }
 
-QList<SWGState*>*
-SWGProvidersSearchResponse::getStates() {
-    return states;
+qint32
+SWGPlanZipCounty::getZipCodeId() {
+    return zip_code_id;
 }
 void
-SWGProvidersSearchResponse::setStates(QList<SWGState*>* states) {
-    this->states = states;
+SWGPlanZipCounty::setZipCodeId(qint32 zip_code_id) {
+    this->zip_code_id = zip_code_id;
 }
 
 
