@@ -129,84 +129,45 @@ The response would be
  * limitations under the License.
  */
 
+/*
+ * SWGPlanShowResponse.h
+ * 
+ * 
+ */
 
-#include "SWGRequestPlanFindProvider.h"
+#ifndef SWGPlanShowResponse_H_
+#define SWGPlanShowResponse_H_
 
-#include "SWGHelpers.h"
+#include <QJsonObject>
 
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QObject>
-#include <QDebug>
+
+#include "SWGPlan.h"
+
+#include "SWGObject.h"
+
 
 namespace Swagger {
 
+class SWGPlanShowResponse: public SWGObject {
+public:
+    SWGPlanShowResponse();
+    SWGPlanShowResponse(QString* json);
+    virtual ~SWGPlanShowResponse();
+    void init();
+    void cleanup();
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider(QString* json) {
-    init();
-    this->fromJson(*json);
-}
+    QString asJson ();
+    QJsonObject* asJsonObject();
+    void fromJsonObject(QJsonObject &json);
+    SWGPlanShowResponse* fromJson(QString &jsonString);
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider() {
-    init();
-}
+    SWGPlan* getPlan();
+    void setPlan(SWGPlan* plan);
 
-SWGRequestPlanFindProvider::~SWGRequestPlanFindProvider() {
-    this->cleanup();
-}
-
-void
-SWGRequestPlanFindProvider::init() {
-    npi = 0;
-}
-
-void
-SWGRequestPlanFindProvider::cleanup() {
-    
-}
-
-SWGRequestPlanFindProvider*
-SWGRequestPlanFindProvider::fromJson(QString &json) {
-    QByteArray array (json.toStdString().c_str());
-    QJsonDocument doc = QJsonDocument::fromJson(array);
-    QJsonObject jsonObject = doc.object();
-    this->fromJsonObject(jsonObject);
-    return this;
-}
-
-void
-SWGRequestPlanFindProvider::fromJsonObject(QJsonObject &pJson) {
-    setValue(&npi, pJson["npi"], "qint32", "");
-}
-
-QString
-SWGRequestPlanFindProvider::asJson ()
-{
-    QJsonObject* obj = this->asJsonObject();
-    
-    QJsonDocument doc(*obj);
-    QByteArray bytes = doc.toJson();
-    return QString(bytes);
-}
-
-QJsonObject*
-SWGRequestPlanFindProvider::asJsonObject() {
-    QJsonObject* obj = new QJsonObject();
-    obj->insert("npi", QJsonValue(npi));
-
-    return obj;
-}
-
-qint32
-SWGRequestPlanFindProvider::getNpi() {
-    return npi;
-}
-void
-SWGRequestPlanFindProvider::setNpi(qint32 npi) {
-    this->npi = npi;
-}
-
-
+private:
+    SWGPlan* plan;
+};
 
 } /* namespace Swagger */
 
+#endif /* SWGPlanShowResponse_H_ */

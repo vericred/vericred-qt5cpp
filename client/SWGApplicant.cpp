@@ -157,7 +157,7 @@ SWGApplicant::~SWGApplicant() {
 
 void
 SWGApplicant::init() {
-    id = NULL;
+    id = 0;
 dob = NULL;
 member_id = new QString("");
 name = new QString("");

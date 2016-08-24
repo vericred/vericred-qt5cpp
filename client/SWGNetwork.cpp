@@ -157,7 +157,7 @@ SWGNetwork::~SWGNetwork() {
 
 void
 SWGNetwork::init() {
-    id = NULL;
+    id = 0;
 name = new QString("");
 }
 

@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGRequestPlanFindProvider.h"
+#include "SWGPlanShowResponse.h"
 
 #include "SWGHelpers.h"
 
@@ -142,31 +142,33 @@ The response would be
 namespace Swagger {
 
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider(QString* json) {
+SWGPlanShowResponse::SWGPlanShowResponse(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider() {
+SWGPlanShowResponse::SWGPlanShowResponse() {
     init();
 }
 
-SWGRequestPlanFindProvider::~SWGRequestPlanFindProvider() {
+SWGPlanShowResponse::~SWGPlanShowResponse() {
     this->cleanup();
 }
 
 void
-SWGRequestPlanFindProvider::init() {
-    npi = 0;
+SWGPlanShowResponse::init() {
+    plan = new SWGPlan();
 }
 
 void
-SWGRequestPlanFindProvider::cleanup() {
-    
+SWGPlanShowResponse::cleanup() {
+    if(plan != NULL) {
+        delete plan;
+    }
 }
 
-SWGRequestPlanFindProvider*
-SWGRequestPlanFindProvider::fromJson(QString &json) {
+SWGPlanShowResponse*
+SWGPlanShowResponse::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -175,12 +177,12 @@ SWGRequestPlanFindProvider::fromJson(QString &json) {
 }
 
 void
-SWGRequestPlanFindProvider::fromJsonObject(QJsonObject &pJson) {
-    setValue(&npi, pJson["npi"], "qint32", "");
+SWGPlanShowResponse::fromJsonObject(QJsonObject &pJson) {
+    setValue(&plan, pJson["plan"], "SWGPlan", "SWGPlan");
 }
 
 QString
-SWGRequestPlanFindProvider::asJson ()
+SWGPlanShowResponse::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -190,20 +192,24 @@ SWGRequestPlanFindProvider::asJson ()
 }
 
 QJsonObject*
-SWGRequestPlanFindProvider::asJsonObject() {
+SWGPlanShowResponse::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    obj->insert("npi", QJsonValue(npi));
+    
+    
+    toJsonValue(QString("plan"), plan, obj, QString("SWGPlan"));
+    
+        
 
     return obj;
 }
 
-qint32
-SWGRequestPlanFindProvider::getNpi() {
-    return npi;
+SWGPlan*
+SWGPlanShowResponse::getPlan() {
+    return plan;
 }
 void
-SWGRequestPlanFindProvider::setNpi(qint32 npi) {
-    this->npi = npi;
+SWGPlanShowResponse::setPlan(SWGPlan* plan) {
+    this->plan = plan;
 }
 
 

@@ -157,10 +157,10 @@ SWGPricing::~SWGPricing() {
 
 void
 SWGPricing::init() {
-    age = NULL;
+    age = 0;
 effective_date = NULL;
 expiration_date = NULL;
-plan_id = NULL;
+plan_id = 0;
 premium_child_only = 0.0;
 premium_family = 0.0;
 premium_single = 0.0;

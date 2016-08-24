@@ -141,6 +141,7 @@ The response would be
 #include <QJsonObject>
 
 
+#include "SWGNumber.h"
 #include <QList>
 #include <QString>
 
@@ -166,6 +167,8 @@ public:
     void setAcceptsInsurance(bool accepts_insurance);
 QList<QString*>* getHiosIds();
     void setHiosIds(QList<QString*>* hios_ids);
+SWGNumber* getMinScore();
+    void setMinScore(SWGNumber* min_score);
 qint32 getPage();
     void setPage(qint32 page);
 qint32 getPerPage();
@@ -182,6 +185,7 @@ QString* getType();
 private:
     bool accepts_insurance;
 QList<QString*>* hios_ids;
+SWGNumber* min_score;
 qint32 page;
 qint32 per_page;
 qint32 radius;

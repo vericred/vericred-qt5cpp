@@ -160,6 +160,8 @@ SWGCountyBulk::init() {
     id = new QString("");
 name = new QString("");
 state_id = new QString("");
+rating_area_count = new QString("");
+service_area_count = new QString("");
 }
 
 void
@@ -172,6 +174,12 @@ if(name != NULL) {
     }
 if(state_id != NULL) {
         delete state_id;
+    }
+if(rating_area_count != NULL) {
+        delete rating_area_count;
+    }
+if(service_area_count != NULL) {
+        delete service_area_count;
     }
 }
 
@@ -189,6 +197,8 @@ SWGCountyBulk::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
 setValue(&name, pJson["name"], "QString", "QString");
 setValue(&state_id, pJson["state_id"], "QString", "QString");
+setValue(&rating_area_count, pJson["rating_area_count"], "QString", "QString");
+setValue(&service_area_count, pJson["service_area_count"], "QString", "QString");
 }
 
 QString
@@ -220,6 +230,16 @@ SWGCountyBulk::asJsonObject() {
     
         
 
+    
+    toJsonValue(QString("rating_area_count"), rating_area_count, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("service_area_count"), service_area_count, obj, QString("QString"));
+    
+        
+
     return obj;
 }
 
@@ -248,6 +268,24 @@ SWGCountyBulk::getStateId() {
 void
 SWGCountyBulk::setStateId(QString* state_id) {
     this->state_id = state_id;
+}
+
+QString*
+SWGCountyBulk::getRatingAreaCount() {
+    return rating_area_count;
+}
+void
+SWGCountyBulk::setRatingAreaCount(QString* rating_area_count) {
+    this->rating_area_count = rating_area_count;
+}
+
+QString*
+SWGCountyBulk::getServiceAreaCount() {
+    return service_area_count;
+}
+void
+SWGCountyBulk::setServiceAreaCount(QString* service_area_count) {
+    this->service_area_count = service_area_count;
 }
 
 

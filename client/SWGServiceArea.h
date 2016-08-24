@@ -129,84 +129,51 @@ The response would be
  * limitations under the License.
  */
 
+/*
+ * SWGServiceArea.h
+ * 
+ * 
+ */
 
-#include "SWGRequestPlanFindProvider.h"
+#ifndef SWGServiceArea_H_
+#define SWGServiceArea_H_
 
-#include "SWGHelpers.h"
+#include <QJsonObject>
 
-#include <QJsonDocument>
-#include <QJsonArray>
-#include <QObject>
-#include <QDebug>
+
+#include <QString>
+
+#include "SWGObject.h"
+
 
 namespace Swagger {
 
+class SWGServiceArea: public SWGObject {
+public:
+    SWGServiceArea();
+    SWGServiceArea(QString* json);
+    virtual ~SWGServiceArea();
+    void init();
+    void cleanup();
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider(QString* json) {
-    init();
-    this->fromJson(*json);
-}
+    QString asJson ();
+    QJsonObject* asJsonObject();
+    void fromJsonObject(QJsonObject &json);
+    SWGServiceArea* fromJson(QString &jsonString);
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider() {
-    init();
-}
+    QString* getId();
+    void setId(QString* id);
+QString* getIssuerId();
+    void setIssuerId(QString* issuer_id);
+QString* getName();
+    void setName(QString* name);
 
-SWGRequestPlanFindProvider::~SWGRequestPlanFindProvider() {
-    this->cleanup();
-}
-
-void
-SWGRequestPlanFindProvider::init() {
-    npi = 0;
-}
-
-void
-SWGRequestPlanFindProvider::cleanup() {
-    
-}
-
-SWGRequestPlanFindProvider*
-SWGRequestPlanFindProvider::fromJson(QString &json) {
-    QByteArray array (json.toStdString().c_str());
-    QJsonDocument doc = QJsonDocument::fromJson(array);
-    QJsonObject jsonObject = doc.object();
-    this->fromJsonObject(jsonObject);
-    return this;
-}
-
-void
-SWGRequestPlanFindProvider::fromJsonObject(QJsonObject &pJson) {
-    setValue(&npi, pJson["npi"], "qint32", "");
-}
-
-QString
-SWGRequestPlanFindProvider::asJson ()
-{
-    QJsonObject* obj = this->asJsonObject();
-    
-    QJsonDocument doc(*obj);
-    QByteArray bytes = doc.toJson();
-    return QString(bytes);
-}
-
-QJsonObject*
-SWGRequestPlanFindProvider::asJsonObject() {
-    QJsonObject* obj = new QJsonObject();
-    obj->insert("npi", QJsonValue(npi));
-
-    return obj;
-}
-
-qint32
-SWGRequestPlanFindProvider::getNpi() {
-    return npi;
-}
-void
-SWGRequestPlanFindProvider::setNpi(qint32 npi) {
-    this->npi = npi;
-}
-
-
+private:
+    QString* id;
+QString* issuer_id;
+QString* name;
+};
 
 } /* namespace Swagger */
 
+#endif /* SWGServiceArea_H_ */

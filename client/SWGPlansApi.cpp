@@ -190,4 +190,54 @@ SWGPlansApi::findPlansCallback(HttpRequestWorker * worker) {
     emit findPlansSignal(output);
     
 }
+void
+SWGPlansApi::showPlan(qint32 year) {
+    QString fullPath;
+    fullPath.append(this->host).append(this->basePath).append("/plans/{id}");
+
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("year"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(year)));
+
+
+    HttpRequestWorker *worker = new HttpRequestWorker();
+    HttpRequestInput input(fullPath, "GET");
+
+    
+
+
+
+    connect(worker,
+            &HttpRequestWorker::on_execution_finished,
+            this,
+            &SWGPlansApi::showPlanCallback);
+
+    worker->execute(&input);
+}
+
+void
+SWGPlansApi::showPlanCallback(HttpRequestWorker * worker) {
+    QString msg;
+    if (worker->error_type == QNetworkReply::NoError) {
+        msg = QString("Success! %1 bytes").arg(worker->response.length());
+    }
+    else {
+        msg = "Error: " + worker->error_str;
+    }
+
+    
+        QString json(worker->response);
+    SWGPlanShowResponse* output = static_cast<SWGPlanShowResponse*>(create(json, QString("SWGPlanShowResponse")));
+    
+
+    worker->deleteLater();
+
+    emit showPlanSignal(output);
+    
+}
 } /* namespace Swagger */

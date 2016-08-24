@@ -157,9 +157,9 @@ SWGZipCounty::~SWGZipCounty() {
 
 void
 SWGZipCounty::init() {
-    county_id = NULL;
-id = NULL;
-zip_code_id = NULL;
+    county_id = 0;
+id = 0;
+zip_code_id = 0;
 }
 
 void

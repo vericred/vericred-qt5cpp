@@ -157,7 +157,7 @@ SWGCarrier::~SWGCarrier() {
 
 void
 SWGCarrier::init() {
-    id = NULL;
+    id = 0;
 name = new QString("");
 logo_path = new QString("");
 }

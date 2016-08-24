@@ -167,11 +167,17 @@ QString* getName();
     void setName(QString* name);
 QString* getStateId();
     void setStateId(QString* state_id);
+QString* getRatingAreaCount();
+    void setRatingAreaCount(QString* rating_area_count);
+QString* getServiceAreaCount();
+    void setServiceAreaCount(QString* service_area_count);
 
 private:
     QString* id;
 QString* name;
 QString* state_id;
+QString* rating_area_count;
+QString* service_area_count;
 };
 
 } /* namespace Swagger */

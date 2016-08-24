@@ -157,8 +157,8 @@ SWGPlanCounty::~SWGPlanCounty() {
 
 void
 SWGPlanCounty::init() {
-    plan_id = NULL;
-county_id = NULL;
+    plan_id = 0;
+county_id = 0;
 }
 
 void

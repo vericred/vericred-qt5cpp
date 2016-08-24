@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGPlanZipCounty.h"
+#include "SWGRequestPlanFindDrugPackage.h"
 
 #include "SWGHelpers.h"
 
@@ -142,35 +142,33 @@ The response would be
 namespace Swagger {
 
 
-SWGPlanZipCounty::SWGPlanZipCounty(QString* json) {
+SWGRequestPlanFindDrugPackage::SWGRequestPlanFindDrugPackage(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGPlanZipCounty::SWGPlanZipCounty() {
+SWGRequestPlanFindDrugPackage::SWGRequestPlanFindDrugPackage() {
     init();
 }
 
-SWGPlanZipCounty::~SWGPlanZipCounty() {
+SWGRequestPlanFindDrugPackage::~SWGRequestPlanFindDrugPackage() {
     this->cleanup();
 }
 
 void
-SWGPlanZipCounty::init() {
-    plan_id = NULL;
-county_id = NULL;
-zip_code_id = NULL;
+SWGRequestPlanFindDrugPackage::init() {
+    id = new QString("");
 }
 
 void
-SWGPlanZipCounty::cleanup() {
-    
-
-
+SWGRequestPlanFindDrugPackage::cleanup() {
+    if(id != NULL) {
+        delete id;
+    }
 }
 
-SWGPlanZipCounty*
-SWGPlanZipCounty::fromJson(QString &json) {
+SWGRequestPlanFindDrugPackage*
+SWGRequestPlanFindDrugPackage::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -179,14 +177,12 @@ SWGPlanZipCounty::fromJson(QString &json) {
 }
 
 void
-SWGPlanZipCounty::fromJsonObject(QJsonObject &pJson) {
-    setValue(&plan_id, pJson["plan_id"], "qint32", "");
-setValue(&county_id, pJson["county_id"], "qint32", "");
-setValue(&zip_code_id, pJson["zip_code_id"], "qint32", "");
+SWGRequestPlanFindDrugPackage::fromJsonObject(QJsonObject &pJson) {
+    setValue(&id, pJson["id"], "QString", "QString");
 }
 
 QString
-SWGPlanZipCounty::asJson ()
+SWGRequestPlanFindDrugPackage::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -196,40 +192,24 @@ SWGPlanZipCounty::asJson ()
 }
 
 QJsonObject*
-SWGPlanZipCounty::asJsonObject() {
+SWGRequestPlanFindDrugPackage::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    obj->insert("plan_id", QJsonValue(plan_id));
-obj->insert("county_id", QJsonValue(county_id));
-obj->insert("zip_code_id", QJsonValue(zip_code_id));
+    
+    
+    toJsonValue(QString("id"), id, obj, QString("QString"));
+    
+        
 
     return obj;
 }
 
-qint32
-SWGPlanZipCounty::getPlanId() {
-    return plan_id;
+QString*
+SWGRequestPlanFindDrugPackage::getId() {
+    return id;
 }
 void
-SWGPlanZipCounty::setPlanId(qint32 plan_id) {
-    this->plan_id = plan_id;
-}
-
-qint32
-SWGPlanZipCounty::getCountyId() {
-    return county_id;
-}
-void
-SWGPlanZipCounty::setCountyId(qint32 county_id) {
-    this->county_id = county_id;
-}
-
-qint32
-SWGPlanZipCounty::getZipCodeId() {
-    return zip_code_id;
-}
-void
-SWGPlanZipCounty::setZipCodeId(qint32 zip_code_id) {
-    this->zip_code_id = zip_code_id;
+SWGRequestPlanFindDrugPackage::setId(QString* id) {
+    this->id = id;
 }
 
 

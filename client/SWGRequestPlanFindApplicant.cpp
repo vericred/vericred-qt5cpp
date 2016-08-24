@@ -157,7 +157,7 @@ SWGRequestPlanFindApplicant::~SWGRequestPlanFindApplicant() {
 
 void
 SWGRequestPlanFindApplicant::init() {
-    age = NULL;
+    age = 0;
 }
 
 void

@@ -152,7 +152,7 @@ The response would be
 #include "SWGPlanCountyBulk.h"
 #include "SWGPlanSearchResponse.h"
 #include "SWGPlanSearchResult.h"
-#include "SWGPlanZipCounty.h"
+#include "SWGPlanShowResponse.h"
 #include "SWGPricing.h"
 #include "SWGProvider.h"
 #include "SWGProviderShowResponse.h"
@@ -160,8 +160,11 @@ The response would be
 #include "SWGRatingArea.h"
 #include "SWGRequestPlanFind.h"
 #include "SWGRequestPlanFindApplicant.h"
+#include "SWGRequestPlanFindDrugPackage.h"
 #include "SWGRequestPlanFindProvider.h"
 #include "SWGRequestProvidersSearch.h"
+#include "SWGServiceArea.h"
+#include "SWGServiceAreaZipCounty.h"
 #include "SWGState.h"
 #include "SWGZipCode.h"
 #include "SWGZipCountiesResponse.h"
@@ -228,8 +231,8 @@ namespace Swagger {
     if(QString("SWGPlanSearchResult").compare(type) == 0) {
       return new SWGPlanSearchResult();
     }
-    if(QString("SWGPlanZipCounty").compare(type) == 0) {
-      return new SWGPlanZipCounty();
+    if(QString("SWGPlanShowResponse").compare(type) == 0) {
+      return new SWGPlanShowResponse();
     }
     if(QString("SWGPricing").compare(type) == 0) {
       return new SWGPricing();
@@ -252,11 +255,20 @@ namespace Swagger {
     if(QString("SWGRequestPlanFindApplicant").compare(type) == 0) {
       return new SWGRequestPlanFindApplicant();
     }
+    if(QString("SWGRequestPlanFindDrugPackage").compare(type) == 0) {
+      return new SWGRequestPlanFindDrugPackage();
+    }
     if(QString("SWGRequestPlanFindProvider").compare(type) == 0) {
       return new SWGRequestPlanFindProvider();
     }
     if(QString("SWGRequestProvidersSearch").compare(type) == 0) {
       return new SWGRequestProvidersSearch();
+    }
+    if(QString("SWGServiceArea").compare(type) == 0) {
+      return new SWGServiceArea();
+    }
+    if(QString("SWGServiceAreaZipCounty").compare(type) == 0) {
+      return new SWGServiceAreaZipCounty();
     }
     if(QString("SWGState").compare(type) == 0) {
       return new SWGState();

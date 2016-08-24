@@ -136,6 +136,7 @@ The response would be
 
 #include "SWGRequestPlanFind.h"
 #include "SWGPlanSearchResponse.h"
+#include "SWGPlanShowResponse.h"
 
 #include <QObject>
 
@@ -153,12 +154,15 @@ public:
     QString basePath;
 
     void findPlans(SWGRequestPlanFind body);
+    void showPlan(qint32 year);
     
 private:
     void findPlansCallback (HttpRequestWorker * worker);
+    void showPlanCallback (HttpRequestWorker * worker);
     
 signals:
     void findPlansSignal(SWGPlanSearchResponse* summary);
+    void showPlanSignal(SWGPlanShowResponse* summary);
     
 };
 }
