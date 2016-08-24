@@ -159,14 +159,15 @@ void
 SWGRequestPlanFind::init() {
     applicants = new QList<SWGRequestPlanFindApplicant*>();
 enrollment_date = new QString("");
-drug_packages = new QList<SWGDrugPackage*>();
+drug_packages = new QList<SWGRequestPlanFindDrugPackage*>();
 fips_code = new QString("");
-household_income = NULL;
-household_size = NULL;
+household_income = 0;
+household_size = 0;
+ids = new QList<qint32>();
 market = new QString("");
 providers = new QList<SWGRequestPlanFindProvider*>();
-page = NULL;
-per_page = NULL;
+page = 0;
+per_page = 0;
 sort = new QString("");
 zip_code = new QString("");
 }
@@ -184,8 +185,8 @@ if(enrollment_date != NULL) {
         delete enrollment_date;
     }
 if(drug_packages != NULL) {
-        QList<SWGDrugPackage*>* arr = drug_packages;
-        foreach(SWGDrugPackage* o, *arr) {
+        QList<SWGRequestPlanFindDrugPackage*>* arr = drug_packages;
+        foreach(SWGRequestPlanFindDrugPackage* o, *arr) {
             delete o;
         }
         delete drug_packages;
@@ -193,6 +194,7 @@ if(drug_packages != NULL) {
 if(fips_code != NULL) {
         delete fips_code;
     }
+
 
 
 if(market != NULL) {
@@ -228,10 +230,11 @@ void
 SWGRequestPlanFind::fromJsonObject(QJsonObject &pJson) {
     setValue(&applicants, pJson["applicants"], "QList", "SWGRequestPlanFindApplicant");
 setValue(&enrollment_date, pJson["enrollment_date"], "QString", "QString");
-setValue(&drug_packages, pJson["drug_packages"], "QList", "SWGDrugPackage");
+setValue(&drug_packages, pJson["drug_packages"], "QList", "SWGRequestPlanFindDrugPackage");
 setValue(&fips_code, pJson["fips_code"], "QString", "QString");
 setValue(&household_income, pJson["household_income"], "qint32", "");
 setValue(&household_size, pJson["household_size"], "qint32", "");
+setValue(&ids, pJson["ids"], "QList", "");
 setValue(&market, pJson["market"], "QString", "QString");
 setValue(&providers, pJson["providers"], "QList", "SWGRequestPlanFindProvider");
 setValue(&page, pJson["page"], "qint32", "");
@@ -268,9 +271,9 @@ SWGRequestPlanFind::asJsonObject() {
         
 
     
-    QList<SWGDrugPackage*>* drug_packagesList = drug_packages;
+    QList<SWGRequestPlanFindDrugPackage*>* drug_packagesList = drug_packages;
     QJsonArray drug_packagesJsonArray;
-    toJsonArray((QList<void*>*)drug_packages, &drug_packagesJsonArray, "drug_packages", "SWGDrugPackage");
+    toJsonArray((QList<void*>*)drug_packages, &drug_packagesJsonArray, "drug_packages", "SWGRequestPlanFindDrugPackage");
 
     obj->insert("drug_packages", drug_packagesJsonArray);
     
@@ -281,6 +284,7 @@ SWGRequestPlanFind::asJsonObject() {
         
 obj->insert("household_income", QJsonValue(household_income));
 obj->insert("household_size", QJsonValue(household_size));
+obj->insert("ids", QJsonValue(ids));
 
     
     toJsonValue(QString("market"), market, obj, QString("QString"));
@@ -328,12 +332,12 @@ SWGRequestPlanFind::setEnrollmentDate(QString* enrollment_date) {
     this->enrollment_date = enrollment_date;
 }
 
-QList<SWGDrugPackage*>*
+QList<SWGRequestPlanFindDrugPackage*>*
 SWGRequestPlanFind::getDrugPackages() {
     return drug_packages;
 }
 void
-SWGRequestPlanFind::setDrugPackages(QList<SWGDrugPackage*>* drug_packages) {
+SWGRequestPlanFind::setDrugPackages(QList<SWGRequestPlanFindDrugPackage*>* drug_packages) {
     this->drug_packages = drug_packages;
 }
 
@@ -362,6 +366,15 @@ SWGRequestPlanFind::getHouseholdSize() {
 void
 SWGRequestPlanFind::setHouseholdSize(qint32 household_size) {
     this->household_size = household_size;
+}
+
+QList<qint32>*
+SWGRequestPlanFind::getIds() {
+    return ids;
+}
+void
+SWGRequestPlanFind::setIds(QList<qint32>* ids) {
+    this->ids = ids;
 }
 
 QString*

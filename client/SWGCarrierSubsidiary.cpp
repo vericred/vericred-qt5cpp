@@ -157,7 +157,7 @@ SWGCarrierSubsidiary::~SWGCarrierSubsidiary() {
 
 void
 SWGCarrierSubsidiary::init() {
-    id = NULL;
+    id = 0;
 name = new QString("");
 alternate_name = new QString("");
 }

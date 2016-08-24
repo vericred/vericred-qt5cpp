@@ -147,12 +147,28 @@ SWGProvidersApi::SWGProvidersApi(QString host, QString basePath) {
 }
 
 void
-SWGProvidersApi::getProvider(QString* npi) {
+SWGProvidersApi::getProvider(QString* npi, QString* year, QString* state) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/providers/{npi}");
 
     QString npiPathParam("{"); npiPathParam.append("npi").append("}");
     fullPath.replace(npiPathParam, stringValue(npi));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("year"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(year)));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("state"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(state)));
 
 
     HttpRequestWorker *worker = new HttpRequestWorker();

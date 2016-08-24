@@ -157,11 +157,11 @@ SWGCounty::~SWGCounty() {
 
 void
 SWGCounty::init() {
-    id = NULL;
+    id = 0;
 fips_code = new QString("");
 name = new QString("");
 state_code = new QString("");
-state_id = NULL;
+state_id = 0;
 state_live = false;
 state_live_for_business = false;
 }

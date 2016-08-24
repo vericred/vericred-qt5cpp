@@ -158,7 +158,7 @@ SWGZipCode::~SWGZipCode() {
 void
 SWGZipCode::init() {
     code = new QString("");
-id = NULL;
+id = 0;
 }
 
 void

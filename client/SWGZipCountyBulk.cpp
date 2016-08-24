@@ -157,7 +157,7 @@ SWGZipCountyBulk::~SWGZipCountyBulk() {
 
 void
 SWGZipCountyBulk::init() {
-    id = NULL;
+    id = 0;
 rating_area_id = new QString("");
 county_id = new QString("");
 zip_code_id = new QString("");

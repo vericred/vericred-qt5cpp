@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGRequestPlanFindProvider.h"
+#include "SWGServiceArea.h"
 
 #include "SWGHelpers.h"
 
@@ -142,31 +142,41 @@ The response would be
 namespace Swagger {
 
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider(QString* json) {
+SWGServiceArea::SWGServiceArea(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider() {
+SWGServiceArea::SWGServiceArea() {
     init();
 }
 
-SWGRequestPlanFindProvider::~SWGRequestPlanFindProvider() {
+SWGServiceArea::~SWGServiceArea() {
     this->cleanup();
 }
 
 void
-SWGRequestPlanFindProvider::init() {
-    npi = 0;
+SWGServiceArea::init() {
+    id = new QString("");
+issuer_id = new QString("");
+name = new QString("");
 }
 
 void
-SWGRequestPlanFindProvider::cleanup() {
-    
+SWGServiceArea::cleanup() {
+    if(id != NULL) {
+        delete id;
+    }
+if(issuer_id != NULL) {
+        delete issuer_id;
+    }
+if(name != NULL) {
+        delete name;
+    }
 }
 
-SWGRequestPlanFindProvider*
-SWGRequestPlanFindProvider::fromJson(QString &json) {
+SWGServiceArea*
+SWGServiceArea::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -175,12 +185,14 @@ SWGRequestPlanFindProvider::fromJson(QString &json) {
 }
 
 void
-SWGRequestPlanFindProvider::fromJsonObject(QJsonObject &pJson) {
-    setValue(&npi, pJson["npi"], "qint32", "");
+SWGServiceArea::fromJsonObject(QJsonObject &pJson) {
+    setValue(&id, pJson["id"], "QString", "QString");
+setValue(&issuer_id, pJson["issuer_id"], "QString", "QString");
+setValue(&name, pJson["name"], "QString", "QString");
 }
 
 QString
-SWGRequestPlanFindProvider::asJson ()
+SWGServiceArea::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -190,20 +202,52 @@ SWGRequestPlanFindProvider::asJson ()
 }
 
 QJsonObject*
-SWGRequestPlanFindProvider::asJsonObject() {
+SWGServiceArea::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    obj->insert("npi", QJsonValue(npi));
+    
+    
+    toJsonValue(QString("id"), id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("issuer_id"), issuer_id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("name"), name, obj, QString("QString"));
+    
+        
 
     return obj;
 }
 
-qint32
-SWGRequestPlanFindProvider::getNpi() {
-    return npi;
+QString*
+SWGServiceArea::getId() {
+    return id;
 }
 void
-SWGRequestPlanFindProvider::setNpi(qint32 npi) {
-    this->npi = npi;
+SWGServiceArea::setId(QString* id) {
+    this->id = id;
+}
+
+QString*
+SWGServiceArea::getIssuerId() {
+    return issuer_id;
+}
+void
+SWGServiceArea::setIssuerId(QString* issuer_id) {
+    this->issuer_id = issuer_id;
+}
+
+QString*
+SWGServiceArea::getName() {
+    return name;
+}
+void
+SWGServiceArea::setName(QString* name) {
+    this->name = name;
 }
 
 

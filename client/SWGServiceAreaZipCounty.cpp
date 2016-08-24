@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGRequestPlanFindProvider.h"
+#include "SWGServiceAreaZipCounty.h"
 
 #include "SWGHelpers.h"
 
@@ -142,31 +142,41 @@ The response would be
 namespace Swagger {
 
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider(QString* json) {
+SWGServiceAreaZipCounty::SWGServiceAreaZipCounty(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGRequestPlanFindProvider::SWGRequestPlanFindProvider() {
+SWGServiceAreaZipCounty::SWGServiceAreaZipCounty() {
     init();
 }
 
-SWGRequestPlanFindProvider::~SWGRequestPlanFindProvider() {
+SWGServiceAreaZipCounty::~SWGServiceAreaZipCounty() {
     this->cleanup();
 }
 
 void
-SWGRequestPlanFindProvider::init() {
-    npi = 0;
+SWGServiceAreaZipCounty::init() {
+    county_id = new QString("");
+service_area_id = new QString("");
+zip_code_id = new QString("");
 }
 
 void
-SWGRequestPlanFindProvider::cleanup() {
-    
+SWGServiceAreaZipCounty::cleanup() {
+    if(county_id != NULL) {
+        delete county_id;
+    }
+if(service_area_id != NULL) {
+        delete service_area_id;
+    }
+if(zip_code_id != NULL) {
+        delete zip_code_id;
+    }
 }
 
-SWGRequestPlanFindProvider*
-SWGRequestPlanFindProvider::fromJson(QString &json) {
+SWGServiceAreaZipCounty*
+SWGServiceAreaZipCounty::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -175,12 +185,14 @@ SWGRequestPlanFindProvider::fromJson(QString &json) {
 }
 
 void
-SWGRequestPlanFindProvider::fromJsonObject(QJsonObject &pJson) {
-    setValue(&npi, pJson["npi"], "qint32", "");
+SWGServiceAreaZipCounty::fromJsonObject(QJsonObject &pJson) {
+    setValue(&county_id, pJson["county_id"], "QString", "QString");
+setValue(&service_area_id, pJson["service_area_id"], "QString", "QString");
+setValue(&zip_code_id, pJson["zip_code_id"], "QString", "QString");
 }
 
 QString
-SWGRequestPlanFindProvider::asJson ()
+SWGServiceAreaZipCounty::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -190,20 +202,52 @@ SWGRequestPlanFindProvider::asJson ()
 }
 
 QJsonObject*
-SWGRequestPlanFindProvider::asJsonObject() {
+SWGServiceAreaZipCounty::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
-    obj->insert("npi", QJsonValue(npi));
+    
+    
+    toJsonValue(QString("county_id"), county_id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("service_area_id"), service_area_id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("zip_code_id"), zip_code_id, obj, QString("QString"));
+    
+        
 
     return obj;
 }
 
-qint32
-SWGRequestPlanFindProvider::getNpi() {
-    return npi;
+QString*
+SWGServiceAreaZipCounty::getCountyId() {
+    return county_id;
 }
 void
-SWGRequestPlanFindProvider::setNpi(qint32 npi) {
-    this->npi = npi;
+SWGServiceAreaZipCounty::setCountyId(QString* county_id) {
+    this->county_id = county_id;
+}
+
+QString*
+SWGServiceAreaZipCounty::getServiceAreaId() {
+    return service_area_id;
+}
+void
+SWGServiceAreaZipCounty::setServiceAreaId(QString* service_area_id) {
+    this->service_area_id = service_area_id;
+}
+
+QString*
+SWGServiceAreaZipCounty::getZipCodeId() {
+    return zip_code_id;
+}
+void
+SWGServiceAreaZipCounty::setZipCodeId(QString* zip_code_id) {
+    this->zip_code_id = zip_code_id;
 }
 
 

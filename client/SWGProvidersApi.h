@@ -154,7 +154,7 @@ public:
     QString host;
     QString basePath;
 
-    void getProvider(QString* npi);
+    void getProvider(QString* npi, QString* year, QString* state);
     void getProviders(SWGRequestProvidersSearch body);
     
 private:

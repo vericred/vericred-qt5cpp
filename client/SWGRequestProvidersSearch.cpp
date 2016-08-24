@@ -159,9 +159,10 @@ void
 SWGRequestProvidersSearch::init() {
     accepts_insurance = false;
 hios_ids = new QList<QString*>();
-page = NULL;
-per_page = NULL;
-radius = NULL;
+min_score = 0.0;
+page = 0;
+per_page = 0;
+radius = 0;
 search_term = new QString("");
 zip_code = new QString("");
 type = new QString("");
@@ -176,6 +177,9 @@ if(hios_ids != NULL) {
             delete o;
         }
         delete hios_ids;
+    }
+if(min_score != NULL) {
+        delete min_score;
     }
 
 
@@ -204,6 +208,7 @@ void
 SWGRequestProvidersSearch::fromJsonObject(QJsonObject &pJson) {
     setValue(&accepts_insurance, pJson["accepts_insurance"], "bool", "");
 setValue(&hios_ids, pJson["hios_ids"], "QList", "QString");
+setValue(&min_score, pJson["min_score"], "SWGNumber", "SWGNumber");
 setValue(&page, pJson["page"], "qint32", "");
 setValue(&per_page, pJson["per_page"], "qint32", "");
 setValue(&radius, pJson["radius"], "qint32", "");
@@ -234,6 +239,11 @@ SWGRequestProvidersSearch::asJsonObject() {
 
     obj->insert("hios_ids", hios_idsJsonArray);
     
+
+    
+    toJsonValue(QString("min_score"), min_score, obj, QString("SWGNumber"));
+    
+        
 obj->insert("page", QJsonValue(page));
 obj->insert("per_page", QJsonValue(per_page));
 obj->insert("radius", QJsonValue(radius));
@@ -272,6 +282,15 @@ SWGRequestProvidersSearch::getHiosIds() {
 void
 SWGRequestProvidersSearch::setHiosIds(QList<QString*>* hios_ids) {
     this->hios_ids = hios_ids;
+}
+
+SWGNumber*
+SWGRequestProvidersSearch::getMinScore() {
+    return min_score;
+}
+void
+SWGRequestProvidersSearch::setMinScore(SWGNumber* min_score) {
+    this->min_score = min_score;
 }
 
 qint32

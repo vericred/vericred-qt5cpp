@@ -169,6 +169,7 @@ child_eye_exam = new QString("");
 customer_service_phone_number = new QString("");
 durable_medical_equipment = new QString("");
 diagnostic_test = new QString("");
+display_name = new QString("");
 dp_rider = false;
 drug_formulary_url = new QString("");
 effective_date = new QString("");
@@ -184,6 +185,7 @@ habilitation_services = new QString("");
 hios_issuer_id = new QString("");
 home_health_care = new QString("");
 hospice_service = new QString("");
+hsa_eligible = false;
 id = new QString("");
 imaging = new QString("");
 in_network_ids = new QList<qint32>();
@@ -199,7 +201,7 @@ inpatient_substance = new QString("");
 level = new QString("");
 logo_url = new QString("");
 name = new QString("");
-network_size = NULL;
+network_size = 0;
 non_preferred_brand_drugs = new QString("");
 on_market = false;
 off_market = false;
@@ -218,6 +220,7 @@ premium_subsidized = 0.0;
 premium = 0.0;
 primary_care_physician = new QString("");
 rehabilitation_services = new QString("");
+service_area_id = new QString("");
 skilled_nursing = new QString("");
 specialist = new QString("");
 specialty_drugs = new QString("");
@@ -255,6 +258,9 @@ if(durable_medical_equipment != NULL) {
     }
 if(diagnostic_test != NULL) {
         delete diagnostic_test;
+    }
+if(display_name != NULL) {
+        delete display_name;
     }
 
 if(drug_formulary_url != NULL) {
@@ -297,6 +303,7 @@ if(home_health_care != NULL) {
 if(hospice_service != NULL) {
         delete hospice_service;
     }
+
 if(id != NULL) {
         delete id;
     }
@@ -387,6 +394,9 @@ if(primary_care_physician != NULL) {
 if(rehabilitation_services != NULL) {
         delete rehabilitation_services;
     }
+if(service_area_id != NULL) {
+        delete service_area_id;
+    }
 if(skilled_nursing != NULL) {
         delete skilled_nursing;
     }
@@ -424,6 +434,7 @@ setValue(&child_eye_exam, pJson["child_eye_exam"], "QString", "QString");
 setValue(&customer_service_phone_number, pJson["customer_service_phone_number"], "QString", "QString");
 setValue(&durable_medical_equipment, pJson["durable_medical_equipment"], "QString", "QString");
 setValue(&diagnostic_test, pJson["diagnostic_test"], "QString", "QString");
+setValue(&display_name, pJson["display_name"], "QString", "QString");
 setValue(&dp_rider, pJson["dp_rider"], "bool", "");
 setValue(&drug_formulary_url, pJson["drug_formulary_url"], "QString", "QString");
 setValue(&effective_date, pJson["effective_date"], "QString", "QString");
@@ -439,6 +450,7 @@ setValue(&habilitation_services, pJson["habilitation_services"], "QString", "QSt
 setValue(&hios_issuer_id, pJson["hios_issuer_id"], "QString", "QString");
 setValue(&home_health_care, pJson["home_health_care"], "QString", "QString");
 setValue(&hospice_service, pJson["hospice_service"], "QString", "QString");
+setValue(&hsa_eligible, pJson["hsa_eligible"], "bool", "");
 setValue(&id, pJson["id"], "QString", "QString");
 setValue(&imaging, pJson["imaging"], "QString", "QString");
 setValue(&in_network_ids, pJson["in_network_ids"], "QList", "");
@@ -473,6 +485,7 @@ setValue(&premium_subsidized, pJson["premium_subsidized"], "SWGNumber", "SWGNumb
 setValue(&premium, pJson["premium"], "SWGNumber", "SWGNumber");
 setValue(&primary_care_physician, pJson["primary_care_physician"], "QString", "QString");
 setValue(&rehabilitation_services, pJson["rehabilitation_services"], "QString", "QString");
+setValue(&service_area_id, pJson["service_area_id"], "QString", "QString");
 setValue(&skilled_nursing, pJson["skilled_nursing"], "QString", "QString");
 setValue(&specialist, pJson["specialist"], "QString", "QString");
 setValue(&specialty_drugs, pJson["specialty_drugs"], "QString", "QString");
@@ -538,6 +551,11 @@ obj->insert("child_dental", QJsonValue(child_dental));
 
     
     toJsonValue(QString("diagnostic_test"), diagnostic_test, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("display_name"), display_name, obj, QString("QString"));
     
         
 obj->insert("dp_rider", QJsonValue(dp_rider));
@@ -607,6 +625,7 @@ obj->insert("fp_rider", QJsonValue(fp_rider));
     toJsonValue(QString("hospice_service"), hospice_service, obj, QString("QString"));
     
         
+obj->insert("hsa_eligible", QJsonValue(hsa_eligible));
 
     
     toJsonValue(QString("id"), id, obj, QString("QString"));
@@ -755,6 +774,11 @@ obj->insert("out_of_network_ids", QJsonValue(out_of_network_ids));
         
 
     
+    toJsonValue(QString("service_area_id"), service_area_id, obj, QString("QString"));
+    
+        
+
+    
     toJsonValue(QString("skilled_nursing"), skilled_nursing, obj, QString("QString"));
     
         
@@ -883,6 +907,15 @@ SWGPlan::getDiagnosticTest() {
 void
 SWGPlan::setDiagnosticTest(QString* diagnostic_test) {
     this->diagnostic_test = diagnostic_test;
+}
+
+QString*
+SWGPlan::getDisplayName() {
+    return display_name;
+}
+void
+SWGPlan::setDisplayName(QString* display_name) {
+    this->display_name = display_name;
 }
 
 bool
@@ -1018,6 +1051,15 @@ SWGPlan::getHospiceService() {
 void
 SWGPlan::setHospiceService(QString* hospice_service) {
     this->hospice_service = hospice_service;
+}
+
+bool
+SWGPlan::getHsaEligible() {
+    return hsa_eligible;
+}
+void
+SWGPlan::setHsaEligible(bool hsa_eligible) {
+    this->hsa_eligible = hsa_eligible;
 }
 
 QString*
@@ -1324,6 +1366,15 @@ SWGPlan::getRehabilitationServices() {
 void
 SWGPlan::setRehabilitationServices(QString* rehabilitation_services) {
     this->rehabilitation_services = rehabilitation_services;
+}
+
+QString*
+SWGPlan::getServiceAreaId() {
+    return service_area_id;
+}
+void
+SWGPlan::setServiceAreaId(QString* service_area_id) {
+    this->service_area_id = service_area_id;
 }
 
 QString*

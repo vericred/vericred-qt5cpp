@@ -130,49 +130,44 @@ The response would be
  */
 
 /*
- * SWGPlanZipCounty.h
+ * SWGRequestPlanFindDrugPackage.h
  * 
  * 
  */
 
-#ifndef SWGPlanZipCounty_H_
-#define SWGPlanZipCounty_H_
+#ifndef SWGRequestPlanFindDrugPackage_H_
+#define SWGRequestPlanFindDrugPackage_H_
 
 #include <QJsonObject>
 
 
+#include <QString>
 
 #include "SWGObject.h"
 
 
 namespace Swagger {
 
-class SWGPlanZipCounty: public SWGObject {
+class SWGRequestPlanFindDrugPackage: public SWGObject {
 public:
-    SWGPlanZipCounty();
-    SWGPlanZipCounty(QString* json);
-    virtual ~SWGPlanZipCounty();
+    SWGRequestPlanFindDrugPackage();
+    SWGRequestPlanFindDrugPackage(QString* json);
+    virtual ~SWGRequestPlanFindDrugPackage();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGPlanZipCounty* fromJson(QString &jsonString);
+    SWGRequestPlanFindDrugPackage* fromJson(QString &jsonString);
 
-    qint32 getPlanId();
-    void setPlanId(qint32 plan_id);
-qint32 getCountyId();
-    void setCountyId(qint32 county_id);
-qint32 getZipCodeId();
-    void setZipCodeId(qint32 zip_code_id);
+    QString* getId();
+    void setId(QString* id);
 
 private:
-    qint32 plan_id;
-qint32 county_id;
-qint32 zip_code_id;
+    QString* id;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGPlanZipCounty_H_ */
+#endif /* SWGRequestPlanFindDrugPackage_H_ */

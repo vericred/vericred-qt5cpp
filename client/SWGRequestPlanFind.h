@@ -141,8 +141,8 @@ The response would be
 #include <QJsonObject>
 
 
-#include "SWGDrugPackage.h"
 #include "SWGRequestPlanFindApplicant.h"
+#include "SWGRequestPlanFindDrugPackage.h"
 #include "SWGRequestPlanFindProvider.h"
 #include <QList>
 #include <QString>
@@ -169,14 +169,16 @@ public:
     void setApplicants(QList<SWGRequestPlanFindApplicant*>* applicants);
 QString* getEnrollmentDate();
     void setEnrollmentDate(QString* enrollment_date);
-QList<SWGDrugPackage*>* getDrugPackages();
-    void setDrugPackages(QList<SWGDrugPackage*>* drug_packages);
+QList<SWGRequestPlanFindDrugPackage*>* getDrugPackages();
+    void setDrugPackages(QList<SWGRequestPlanFindDrugPackage*>* drug_packages);
 QString* getFipsCode();
     void setFipsCode(QString* fips_code);
 qint32 getHouseholdIncome();
     void setHouseholdIncome(qint32 household_income);
 qint32 getHouseholdSize();
     void setHouseholdSize(qint32 household_size);
+QList<qint32>* getIds();
+    void setIds(QList<qint32>* ids);
 QString* getMarket();
     void setMarket(QString* market);
 QList<SWGRequestPlanFindProvider*>* getProviders();
@@ -193,10 +195,11 @@ QString* getZipCode();
 private:
     QList<SWGRequestPlanFindApplicant*>* applicants;
 QString* enrollment_date;
-QList<SWGDrugPackage*>* drug_packages;
+QList<SWGRequestPlanFindDrugPackage*>* drug_packages;
 QString* fips_code;
 qint32 household_income;
 qint32 household_size;
+QList<qint32>* ids;
 QString* market;
 QList<SWGRequestPlanFindProvider*>* providers;
 qint32 page;

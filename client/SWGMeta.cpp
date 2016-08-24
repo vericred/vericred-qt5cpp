@@ -157,7 +157,7 @@ SWGMeta::~SWGMeta() {
 
 void
 SWGMeta::init() {
-    total = NULL;
+    total = 0;
 }
 
 void

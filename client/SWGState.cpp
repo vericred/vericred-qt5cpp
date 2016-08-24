@@ -157,7 +157,7 @@ SWGState::~SWGState() {
 
 void
 SWGState::init() {
-    id = NULL;
+    id = 0;
 name = new QString("");
 code = new QString("");
 fips_number = new QString("");
