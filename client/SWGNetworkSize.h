@@ -130,19 +130,17 @@ The response would be
  */
 
 /*
- * SWGRequestProvidersSearch.h
+ * SWGNetworkSize.h
  * 
  * 
  */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#ifndef SWGNetworkSize_H_
+#define SWGNetworkSize_H_
 
 #include <QJsonObject>
 
 
-#include "SWGNumber.h"
-#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -150,53 +148,32 @@ The response would be
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
+class SWGNetworkSize: public SWGObject {
 public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
+    SWGNetworkSize();
+    SWGNetworkSize(QString* json);
+    virtual ~SWGNetworkSize();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+    SWGNetworkSize* fromJson(QString &jsonString);
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+    qint32 getNetworkId();
+    void setNetworkId(qint32 network_id);
+qint32 getCount();
+    void setCount(qint32 count);
+QString* getStateId();
+    void setStateId(QString* state_id);
 
 private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
+    qint32 network_id;
+qint32 count;
+QString* state_id;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */
+#endif /* SWGNetworkSize_H_ */

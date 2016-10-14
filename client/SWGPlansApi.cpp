@@ -191,10 +191,12 @@ SWGPlansApi::findPlansCallback(HttpRequestWorker * worker) {
     
 }
 void
-SWGPlansApi::showPlan(qint32 year) {
+SWGPlansApi::showPlan(QString* id, qint32 year) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/plans/{id}");
 
+    QString idPathParam("{"); idPathParam.append("id").append("}");
+    fullPath.replace(idPathParam, stringValue(id));
 
     if (fullPath.indexOf("?") > 0) 
       fullPath.append("&");

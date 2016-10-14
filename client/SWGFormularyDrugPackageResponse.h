@@ -130,73 +130,52 @@ The response would be
  */
 
 /*
- * SWGRequestProvidersSearch.h
+ * SWGFormularyDrugPackageResponse.h
  * 
  * 
  */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#ifndef SWGFormularyDrugPackageResponse_H_
+#define SWGFormularyDrugPackageResponse_H_
 
 #include <QJsonObject>
 
 
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
+#include "SWGDrugCoverage.h"
+#include "SWGDrugPackage.h"
+#include "SWGFormulary.h"
 
 #include "SWGObject.h"
 
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
+class SWGFormularyDrugPackageResponse: public SWGObject {
 public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
+    SWGFormularyDrugPackageResponse();
+    SWGFormularyDrugPackageResponse(QString* json);
+    virtual ~SWGFormularyDrugPackageResponse();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+    SWGFormularyDrugPackageResponse* fromJson(QString &jsonString);
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+    SWGDrugCoverage* getCoverage();
+    void setCoverage(SWGDrugCoverage* coverage);
+SWGDrugPackage* getDrugPackage();
+    void setDrugPackage(SWGDrugPackage* drug_package);
+SWGFormulary* getFormulary();
+    void setFormulary(SWGFormulary* formulary);
 
 private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
+    SWGDrugCoverage* coverage;
+SWGDrugPackage* drug_package;
+SWGFormulary* formulary;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */
+#endif /* SWGFormularyDrugPackageResponse_H_ */

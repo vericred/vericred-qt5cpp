@@ -164,6 +164,8 @@ public:
 
     QString* getId();
     void setId(QString* id);
+QString* getActiveIngredientStrength();
+    void setActiveIngredientStrength(QString* active_ingredient_strength);
 QString* getProprietaryName();
     void setProprietaryName(QString* proprietary_name);
 QString* getNonProprietaryName();
@@ -173,6 +175,7 @@ QList<QString*>* getDrugPackageIds();
 
 private:
     QString* id;
+QString* active_ingredient_strength;
 QString* proprietary_name;
 QString* non_proprietary_name;
 QList<QString*>* drug_package_ids;

@@ -159,10 +159,11 @@ void
 SWGDrugCoverage::init() {
     plan_id = new QString("");
 drug_package_id = new QString("");
-tier = new QString("");
+med_id = 0;
 quantity_limit = false;
 prior_authorization = false;
 step_therapy = false;
+tier = new QString("");
 }
 
 void
@@ -173,12 +174,13 @@ SWGDrugCoverage::cleanup() {
 if(drug_package_id != NULL) {
         delete drug_package_id;
     }
+
+
+
+
 if(tier != NULL) {
         delete tier;
     }
-
-
-
 }
 
 SWGDrugCoverage*
@@ -194,10 +196,11 @@ void
 SWGDrugCoverage::fromJsonObject(QJsonObject &pJson) {
     setValue(&plan_id, pJson["plan_id"], "QString", "QString");
 setValue(&drug_package_id, pJson["drug_package_id"], "QString", "QString");
-setValue(&tier, pJson["tier"], "QString", "QString");
+setValue(&med_id, pJson["med_id"], "qint32", "");
 setValue(&quantity_limit, pJson["quantity_limit"], "bool", "");
 setValue(&prior_authorization, pJson["prior_authorization"], "bool", "");
 setValue(&step_therapy, pJson["step_therapy"], "bool", "");
+setValue(&tier, pJson["tier"], "QString", "QString");
 }
 
 QString
@@ -223,14 +226,15 @@ SWGDrugCoverage::asJsonObject() {
     toJsonValue(QString("drug_package_id"), drug_package_id, obj, QString("QString"));
     
         
+obj->insert("med_id", QJsonValue(med_id));
+obj->insert("quantity_limit", QJsonValue(quantity_limit));
+obj->insert("prior_authorization", QJsonValue(prior_authorization));
+obj->insert("step_therapy", QJsonValue(step_therapy));
 
     
     toJsonValue(QString("tier"), tier, obj, QString("QString"));
     
         
-obj->insert("quantity_limit", QJsonValue(quantity_limit));
-obj->insert("prior_authorization", QJsonValue(prior_authorization));
-obj->insert("step_therapy", QJsonValue(step_therapy));
 
     return obj;
 }
@@ -253,13 +257,13 @@ SWGDrugCoverage::setDrugPackageId(QString* drug_package_id) {
     this->drug_package_id = drug_package_id;
 }
 
-QString*
-SWGDrugCoverage::getTier() {
-    return tier;
+qint32
+SWGDrugCoverage::getMedId() {
+    return med_id;
 }
 void
-SWGDrugCoverage::setTier(QString* tier) {
-    this->tier = tier;
+SWGDrugCoverage::setMedId(qint32 med_id) {
+    this->med_id = med_id;
 }
 
 bool
@@ -287,6 +291,15 @@ SWGDrugCoverage::getStepTherapy() {
 void
 SWGDrugCoverage::setStepTherapy(bool step_therapy) {
     this->step_therapy = step_therapy;
+}
+
+QString*
+SWGDrugCoverage::getTier() {
+    return tier;
+}
+void
+SWGDrugCoverage::setTier(QString* tier) {
+    this->tier = tier;
 }
 
 

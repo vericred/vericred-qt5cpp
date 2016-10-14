@@ -158,6 +158,7 @@ SWGDrug::~SWGDrug() {
 void
 SWGDrug::init() {
     id = new QString("");
+active_ingredient_strength = new QString("");
 proprietary_name = new QString("");
 non_proprietary_name = new QString("");
 drug_package_ids = new QList<QString*>();
@@ -167,6 +168,9 @@ void
 SWGDrug::cleanup() {
     if(id != NULL) {
         delete id;
+    }
+if(active_ingredient_strength != NULL) {
+        delete active_ingredient_strength;
     }
 if(proprietary_name != NULL) {
         delete proprietary_name;
@@ -195,6 +199,7 @@ SWGDrug::fromJson(QString &json) {
 void
 SWGDrug::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
+setValue(&active_ingredient_strength, pJson["active_ingredient_strength"], "QString", "QString");
 setValue(&proprietary_name, pJson["proprietary_name"], "QString", "QString");
 setValue(&non_proprietary_name, pJson["non_proprietary_name"], "QString", "QString");
 setValue(&drug_package_ids, pJson["drug_package_ids"], "QList", "QString");
@@ -216,6 +221,11 @@ SWGDrug::asJsonObject() {
     
     
     toJsonValue(QString("id"), id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("active_ingredient_strength"), active_ingredient_strength, obj, QString("QString"));
     
         
 
@@ -247,6 +257,15 @@ SWGDrug::getId() {
 void
 SWGDrug::setId(QString* id) {
     this->id = id;
+}
+
+QString*
+SWGDrug::getActiveIngredientStrength() {
+    return active_ingredient_strength;
+}
+void
+SWGDrug::setActiveIngredientStrength(QString* active_ingredient_strength) {
+    this->active_ingredient_strength = active_ingredient_strength;
 }
 
 QString*

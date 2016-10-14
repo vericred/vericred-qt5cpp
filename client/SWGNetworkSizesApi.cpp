@@ -129,74 +129,81 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
+#include "SWGNetworkSizesApi.h"
+#include "SWGHelpers.h"
+#include "SWGModelFactory.h"
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
-
-#include <QJsonObject>
-
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonArray>
+#include <QJsonDocument>
 
 namespace Swagger {
+SWGNetworkSizesApi::SWGNetworkSizesApi() {}
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
+SWGNetworkSizesApi::~SWGNetworkSizesApi() {}
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGNetworkSizesApi::SWGNetworkSizesApi(QString host, QString basePath) {
+    this->host = host;
+    this->basePath = basePath;
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+void
+SWGNetworkSizesApi::listStateNetworkSizes(QString* stateId, qint32 page, qint32 perPage) {
+    QString fullPath;
+    fullPath.append(this->host).append(this->basePath).append("/states/{state_id}/network_sizes");
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+    QString stateIdPathParam("{"); stateIdPathParam.append("stateId").append("}");
+    fullPath.replace(stateIdPathParam, stringValue(stateId));
 
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("page"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(page)));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("perPage"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(perPage)));
+
+
+    HttpRequestWorker *worker = new HttpRequestWorker();
+    HttpRequestInput input(fullPath, "GET");
+
+    
+
+
+
+    connect(worker,
+            &HttpRequestWorker::on_execution_finished,
+            this,
+            &SWGNetworkSizesApi::listStateNetworkSizesCallback);
+
+    worker->execute(&input);
+}
+
+void
+SWGNetworkSizesApi::listStateNetworkSizesCallback(HttpRequestWorker * worker) {
+    QString msg;
+    if (worker->error_type == QNetworkReply::NoError) {
+        msg = QString("Success! %1 bytes").arg(worker->response.length());
+    }
+    else {
+        msg = "Error: " + worker->error_str;
+    }
+
+    
+        QString json(worker->response);
+    SWGStateNetworkSizeResponse* output = static_cast<SWGStateNetworkSizeResponse*>(create(json, QString("SWGStateNetworkSizeResponse")));
+    
+
+    worker->deleteLater();
+
+    emit listStateNetworkSizesSignal(output);
+    
+}
 } /* namespace Swagger */
-
-#endif /* SWGRequestProvidersSearch_H_ */

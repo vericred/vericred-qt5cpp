@@ -160,6 +160,7 @@ SWGRequestProvidersSearch::init() {
     accepts_insurance = false;
 hios_ids = new QList<QString*>();
 min_score = 0.0;
+network_ids = new QList<qint32>();
 page = 0;
 per_page = 0;
 radius = 0;
@@ -181,6 +182,7 @@ if(hios_ids != NULL) {
 if(min_score != NULL) {
         delete min_score;
     }
+
 
 
 
@@ -209,6 +211,7 @@ SWGRequestProvidersSearch::fromJsonObject(QJsonObject &pJson) {
     setValue(&accepts_insurance, pJson["accepts_insurance"], "bool", "");
 setValue(&hios_ids, pJson["hios_ids"], "QList", "QString");
 setValue(&min_score, pJson["min_score"], "SWGNumber", "SWGNumber");
+setValue(&network_ids, pJson["network_ids"], "QList", "");
 setValue(&page, pJson["page"], "qint32", "");
 setValue(&per_page, pJson["per_page"], "qint32", "");
 setValue(&radius, pJson["radius"], "qint32", "");
@@ -244,6 +247,7 @@ SWGRequestProvidersSearch::asJsonObject() {
     toJsonValue(QString("min_score"), min_score, obj, QString("SWGNumber"));
     
         
+obj->insert("network_ids", QJsonValue(network_ids));
 obj->insert("page", QJsonValue(page));
 obj->insert("per_page", QJsonValue(per_page));
 obj->insert("radius", QJsonValue(radius));
@@ -291,6 +295,15 @@ SWGRequestProvidersSearch::getMinScore() {
 void
 SWGRequestProvidersSearch::setMinScore(SWGNumber* min_score) {
     this->min_score = min_score;
+}
+
+QList<qint32>*
+SWGRequestProvidersSearch::getNetworkIds() {
+    return network_ids;
+}
+void
+SWGRequestProvidersSearch::setNetworkIds(QList<qint32>* network_ids) {
+    this->network_ids = network_ids;
 }
 
 qint32

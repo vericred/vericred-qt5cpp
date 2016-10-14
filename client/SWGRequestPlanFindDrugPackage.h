@@ -163,9 +163,12 @@ public:
 
     QString* getId();
     void setId(QString* id);
+qint32 getMedId();
+    void setMedId(qint32 med_id);
 
 private:
     QString* id;
+qint32 med_id;
 };
 
 } /* namespace Swagger */

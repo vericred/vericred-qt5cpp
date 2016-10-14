@@ -130,7 +130,7 @@ The response would be
  */
 
 
-#include "SWGProvider.h"
+#include "SWGProviderDetails.h"
 
 #include "SWGHelpers.h"
 
@@ -142,21 +142,21 @@ The response would be
 namespace Swagger {
 
 
-SWGProvider::SWGProvider(QString* json) {
+SWGProviderDetails::SWGProviderDetails(QString* json) {
     init();
     this->fromJson(*json);
 }
 
-SWGProvider::SWGProvider() {
+SWGProviderDetails::SWGProviderDetails() {
     init();
 }
 
-SWGProvider::~SWGProvider() {
+SWGProviderDetails::~SWGProviderDetails() {
     this->cleanup();
 }
 
 void
-SWGProvider::init() {
+SWGProviderDetails::init() {
     accepting_change_of_payor_patients = false;
 accepting_medicaid_patients = false;
 accepting_medicare_patients = false;
@@ -185,10 +185,11 @@ suffix = new QString("");
 title = new QString("");
 type = new QString("");
 zip_code = new QString("");
+hios_ids = new QList<QString*>();
 }
 
 void
-SWGProvider::cleanup() {
+SWGProviderDetails::cleanup() {
     
 
 
@@ -257,10 +258,17 @@ if(type != NULL) {
 if(zip_code != NULL) {
         delete zip_code;
     }
+if(hios_ids != NULL) {
+        QList<QString*>* arr = hios_ids;
+        foreach(QString* o, *arr) {
+            delete o;
+        }
+        delete hios_ids;
+    }
 }
 
-SWGProvider*
-SWGProvider::fromJson(QString &json) {
+SWGProviderDetails*
+SWGProviderDetails::fromJson(QString &json) {
     QByteArray array (json.toStdString().c_str());
     QJsonDocument doc = QJsonDocument::fromJson(array);
     QJsonObject jsonObject = doc.object();
@@ -269,7 +277,7 @@ SWGProvider::fromJson(QString &json) {
 }
 
 void
-SWGProvider::fromJsonObject(QJsonObject &pJson) {
+SWGProviderDetails::fromJsonObject(QJsonObject &pJson) {
     setValue(&accepting_change_of_payor_patients, pJson["accepting_change_of_payor_patients"], "bool", "");
 setValue(&accepting_medicaid_patients, pJson["accepting_medicaid_patients"], "bool", "");
 setValue(&accepting_medicare_patients, pJson["accepting_medicare_patients"], "bool", "");
@@ -298,10 +306,11 @@ setValue(&suffix, pJson["suffix"], "QString", "QString");
 setValue(&title, pJson["title"], "QString", "QString");
 setValue(&type, pJson["type"], "QString", "QString");
 setValue(&zip_code, pJson["zip_code"], "QString", "QString");
+setValue(&hios_ids, pJson["hios_ids"], "QList", "QString");
 }
 
 QString
-SWGProvider::asJson ()
+SWGProviderDetails::asJson ()
 {
     QJsonObject* obj = this->asJsonObject();
     
@@ -311,7 +320,7 @@ SWGProvider::asJson ()
 }
 
 QJsonObject*
-SWGProvider::asJsonObject() {
+SWGProviderDetails::asJsonObject() {
     QJsonObject* obj = new QJsonObject();
     obj->insert("accepting_change_of_payor_patients", QJsonValue(accepting_change_of_payor_patients));
 obj->insert("accepting_medicaid_patients", QJsonValue(accepting_medicaid_patients));
@@ -422,259 +431,276 @@ obj->insert("state_id", QJsonValue(state_id));
     
         
 
+    
+    QList<QString*>* hios_idsList = hios_ids;
+    QJsonArray hios_idsJsonArray;
+    toJsonArray((QList<void*>*)hios_ids, &hios_idsJsonArray, "hios_ids", "QString");
+
+    obj->insert("hios_ids", hios_idsJsonArray);
+    
+
     return obj;
 }
 
 bool
-SWGProvider::getAcceptingChangeOfPayorPatients() {
+SWGProviderDetails::getAcceptingChangeOfPayorPatients() {
     return accepting_change_of_payor_patients;
 }
 void
-SWGProvider::setAcceptingChangeOfPayorPatients(bool accepting_change_of_payor_patients) {
+SWGProviderDetails::setAcceptingChangeOfPayorPatients(bool accepting_change_of_payor_patients) {
     this->accepting_change_of_payor_patients = accepting_change_of_payor_patients;
 }
 
 bool
-SWGProvider::getAcceptingMedicaidPatients() {
+SWGProviderDetails::getAcceptingMedicaidPatients() {
     return accepting_medicaid_patients;
 }
 void
-SWGProvider::setAcceptingMedicaidPatients(bool accepting_medicaid_patients) {
+SWGProviderDetails::setAcceptingMedicaidPatients(bool accepting_medicaid_patients) {
     this->accepting_medicaid_patients = accepting_medicaid_patients;
 }
 
 bool
-SWGProvider::getAcceptingMedicarePatients() {
+SWGProviderDetails::getAcceptingMedicarePatients() {
     return accepting_medicare_patients;
 }
 void
-SWGProvider::setAcceptingMedicarePatients(bool accepting_medicare_patients) {
+SWGProviderDetails::setAcceptingMedicarePatients(bool accepting_medicare_patients) {
     this->accepting_medicare_patients = accepting_medicare_patients;
 }
 
 bool
-SWGProvider::getAcceptingPrivatePatients() {
+SWGProviderDetails::getAcceptingPrivatePatients() {
     return accepting_private_patients;
 }
 void
-SWGProvider::setAcceptingPrivatePatients(bool accepting_private_patients) {
+SWGProviderDetails::setAcceptingPrivatePatients(bool accepting_private_patients) {
     this->accepting_private_patients = accepting_private_patients;
 }
 
 bool
-SWGProvider::getAcceptingReferralPatients() {
+SWGProviderDetails::getAcceptingReferralPatients() {
     return accepting_referral_patients;
 }
 void
-SWGProvider::setAcceptingReferralPatients(bool accepting_referral_patients) {
+SWGProviderDetails::setAcceptingReferralPatients(bool accepting_referral_patients) {
     this->accepting_referral_patients = accepting_referral_patients;
 }
 
 QString*
-SWGProvider::getCity() {
+SWGProviderDetails::getCity() {
     return city;
 }
 void
-SWGProvider::setCity(QString* city) {
+SWGProviderDetails::setCity(QString* city) {
     this->city = city;
 }
 
 QString*
-SWGProvider::getEmail() {
+SWGProviderDetails::getEmail() {
     return email;
 }
 void
-SWGProvider::setEmail(QString* email) {
+SWGProviderDetails::setEmail(QString* email) {
     this->email = email;
 }
 
 QString*
-SWGProvider::getGender() {
+SWGProviderDetails::getGender() {
     return gender;
 }
 void
-SWGProvider::setGender(QString* gender) {
+SWGProviderDetails::setGender(QString* gender) {
     this->gender = gender;
 }
 
 QString*
-SWGProvider::getFirstName() {
+SWGProviderDetails::getFirstName() {
     return first_name;
 }
 void
-SWGProvider::setFirstName(QString* first_name) {
+SWGProviderDetails::setFirstName(QString* first_name) {
     this->first_name = first_name;
 }
 
 qint32
-SWGProvider::getId() {
+SWGProviderDetails::getId() {
     return id;
 }
 void
-SWGProvider::setId(qint32 id) {
+SWGProviderDetails::setId(qint32 id) {
     this->id = id;
 }
 
 QString*
-SWGProvider::getLastName() {
+SWGProviderDetails::getLastName() {
     return last_name;
 }
 void
-SWGProvider::setLastName(QString* last_name) {
+SWGProviderDetails::setLastName(QString* last_name) {
     this->last_name = last_name;
 }
 
 SWGNumber*
-SWGProvider::getLatitude() {
+SWGProviderDetails::getLatitude() {
     return latitude;
 }
 void
-SWGProvider::setLatitude(SWGNumber* latitude) {
+SWGProviderDetails::setLatitude(SWGNumber* latitude) {
     this->latitude = latitude;
 }
 
 SWGNumber*
-SWGProvider::getLongitude() {
+SWGProviderDetails::getLongitude() {
     return longitude;
 }
 void
-SWGProvider::setLongitude(SWGNumber* longitude) {
+SWGProviderDetails::setLongitude(SWGNumber* longitude) {
     this->longitude = longitude;
 }
 
 QString*
-SWGProvider::getMiddleName() {
+SWGProviderDetails::getMiddleName() {
     return middle_name;
 }
 void
-SWGProvider::setMiddleName(QString* middle_name) {
+SWGProviderDetails::setMiddleName(QString* middle_name) {
     this->middle_name = middle_name;
 }
 
 QList<qint32>*
-SWGProvider::getNetworkIds() {
+SWGProviderDetails::getNetworkIds() {
     return network_ids;
 }
 void
-SWGProvider::setNetworkIds(QList<qint32>* network_ids) {
+SWGProviderDetails::setNetworkIds(QList<qint32>* network_ids) {
     this->network_ids = network_ids;
 }
 
 QString*
-SWGProvider::getOrganizationName() {
+SWGProviderDetails::getOrganizationName() {
     return organization_name;
 }
 void
-SWGProvider::setOrganizationName(QString* organization_name) {
+SWGProviderDetails::setOrganizationName(QString* organization_name) {
     this->organization_name = organization_name;
 }
 
 QString*
-SWGProvider::getPersonalPhone() {
+SWGProviderDetails::getPersonalPhone() {
     return personal_phone;
 }
 void
-SWGProvider::setPersonalPhone(QString* personal_phone) {
+SWGProviderDetails::setPersonalPhone(QString* personal_phone) {
     this->personal_phone = personal_phone;
 }
 
 QString*
-SWGProvider::getPhone() {
+SWGProviderDetails::getPhone() {
     return phone;
 }
 void
-SWGProvider::setPhone(QString* phone) {
+SWGProviderDetails::setPhone(QString* phone) {
     this->phone = phone;
 }
 
 QString*
-SWGProvider::getPresentationName() {
+SWGProviderDetails::getPresentationName() {
     return presentation_name;
 }
 void
-SWGProvider::setPresentationName(QString* presentation_name) {
+SWGProviderDetails::setPresentationName(QString* presentation_name) {
     this->presentation_name = presentation_name;
 }
 
 QString*
-SWGProvider::getSpecialty() {
+SWGProviderDetails::getSpecialty() {
     return specialty;
 }
 void
-SWGProvider::setSpecialty(QString* specialty) {
+SWGProviderDetails::setSpecialty(QString* specialty) {
     this->specialty = specialty;
 }
 
 QString*
-SWGProvider::getState() {
+SWGProviderDetails::getState() {
     return state;
 }
 void
-SWGProvider::setState(QString* state) {
+SWGProviderDetails::setState(QString* state) {
     this->state = state;
 }
 
 qint32
-SWGProvider::getStateId() {
+SWGProviderDetails::getStateId() {
     return state_id;
 }
 void
-SWGProvider::setStateId(qint32 state_id) {
+SWGProviderDetails::setStateId(qint32 state_id) {
     this->state_id = state_id;
 }
 
 QString*
-SWGProvider::getStreetLine1() {
+SWGProviderDetails::getStreetLine1() {
     return street_line_1;
 }
 void
-SWGProvider::setStreetLine1(QString* street_line_1) {
+SWGProviderDetails::setStreetLine1(QString* street_line_1) {
     this->street_line_1 = street_line_1;
 }
 
 QString*
-SWGProvider::getStreetLine2() {
+SWGProviderDetails::getStreetLine2() {
     return street_line_2;
 }
 void
-SWGProvider::setStreetLine2(QString* street_line_2) {
+SWGProviderDetails::setStreetLine2(QString* street_line_2) {
     this->street_line_2 = street_line_2;
 }
 
 QString*
-SWGProvider::getSuffix() {
+SWGProviderDetails::getSuffix() {
     return suffix;
 }
 void
-SWGProvider::setSuffix(QString* suffix) {
+SWGProviderDetails::setSuffix(QString* suffix) {
     this->suffix = suffix;
 }
 
 QString*
-SWGProvider::getTitle() {
+SWGProviderDetails::getTitle() {
     return title;
 }
 void
-SWGProvider::setTitle(QString* title) {
+SWGProviderDetails::setTitle(QString* title) {
     this->title = title;
 }
 
 QString*
-SWGProvider::getType() {
+SWGProviderDetails::getType() {
     return type;
 }
 void
-SWGProvider::setType(QString* type) {
+SWGProviderDetails::setType(QString* type) {
     this->type = type;
 }
 
 QString*
-SWGProvider::getZipCode() {
+SWGProviderDetails::getZipCode() {
     return zip_code;
 }
 void
-SWGProvider::setZipCode(QString* zip_code) {
+SWGProviderDetails::setZipCode(QString* zip_code) {
     this->zip_code = zip_code;
+}
+
+QList<QString*>*
+SWGProviderDetails::getHiosIds() {
+    return hios_ids;
+}
+void
+SWGProviderDetails::setHiosIds(QList<QString*>* hios_ids) {
+    this->hios_ids = hios_ids;
 }
 
 

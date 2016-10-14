@@ -159,6 +159,7 @@ void
 SWGDrugPackage::init() {
     id = new QString("");
 description = new QString("");
+med_id = 0;
 }
 
 void
@@ -169,6 +170,7 @@ SWGDrugPackage::cleanup() {
 if(description != NULL) {
         delete description;
     }
+
 }
 
 SWGDrugPackage*
@@ -184,6 +186,7 @@ void
 SWGDrugPackage::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
 setValue(&description, pJson["description"], "QString", "QString");
+setValue(&med_id, pJson["med_id"], "qint32", "");
 }
 
 QString
@@ -209,6 +212,7 @@ SWGDrugPackage::asJsonObject() {
     toJsonValue(QString("description"), description, obj, QString("QString"));
     
         
+obj->insert("med_id", QJsonValue(med_id));
 
     return obj;
 }
@@ -229,6 +233,15 @@ SWGDrugPackage::getDescription() {
 void
 SWGDrugPackage::setDescription(QString* description) {
     this->description = description;
+}
+
+qint32
+SWGDrugPackage::getMedId() {
+    return med_id;
+}
+void
+SWGDrugPackage::setMedId(qint32 med_id) {
+    this->med_id = med_id;
 }
 
 

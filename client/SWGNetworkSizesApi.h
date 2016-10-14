@@ -129,74 +129,37 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
+#ifndef _SWG_SWGNetworkSizesApi_H_
+#define _SWG_SWGNetworkSizesApi_H_
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#include "SWGHttpRequest.h"
 
-#include <QJsonObject>
-
-
-#include "SWGNumber.h"
-#include <QList>
 #include <QString>
+#include "SWGStateNetworkSizeResponse.h"
 
-#include "SWGObject.h"
-
+#include <QObject>
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
+class SWGNetworkSizesApi: public QObject {
+    Q_OBJECT
+
 public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
+    SWGNetworkSizesApi();
+    SWGNetworkSizesApi(QString host, QString basePath);
+    ~SWGNetworkSizesApi();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+    QString host;
+    QString basePath;
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
-
+    void listStateNetworkSizes(QString* stateId, qint32 page, qint32 perPage);
+    
 private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
+    void listStateNetworkSizesCallback (HttpRequestWorker * worker);
+    
+signals:
+    void listStateNetworkSizesSignal(SWGStateNetworkSizeResponse* summary);
+    
 };
-
-} /* namespace Swagger */
-
-#endif /* SWGRequestProvidersSearch_H_ */
+}
+#endif

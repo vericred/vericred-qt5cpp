@@ -129,74 +129,67 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
+#include "SWGDrugPackagesApi.h"
+#include "SWGHelpers.h"
+#include "SWGModelFactory.h"
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
-
-#include <QJsonObject>
-
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonArray>
+#include <QJsonDocument>
 
 namespace Swagger {
+SWGDrugPackagesApi::SWGDrugPackagesApi() {}
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
+SWGDrugPackagesApi::~SWGDrugPackagesApi() {}
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGDrugPackagesApi::SWGDrugPackagesApi(QString host, QString basePath) {
+    this->host = host;
+    this->basePath = basePath;
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+void
+SWGDrugPackagesApi::showFormularyDrugPackageCoverage(QString* formularyId, QString* ndcPackageCode) {
+    QString fullPath;
+    fullPath.append(this->host).append(this->basePath).append("/formularies/{formulary_id}/drug_packages/{ndc_package_code}");
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+    QString formularyIdPathParam("{"); formularyIdPathParam.append("formularyId").append("}");
+    fullPath.replace(formularyIdPathParam, stringValue(formularyId));
+    QString ndcPackageCodePathParam("{"); ndcPackageCodePathParam.append("ndcPackageCode").append("}");
+    fullPath.replace(ndcPackageCodePathParam, stringValue(ndcPackageCode));
 
+
+    HttpRequestWorker *worker = new HttpRequestWorker();
+    HttpRequestInput input(fullPath, "GET");
+
+    
+
+
+
+    connect(worker,
+            &HttpRequestWorker::on_execution_finished,
+            this,
+            &SWGDrugPackagesApi::showFormularyDrugPackageCoverageCallback);
+
+    worker->execute(&input);
+}
+
+void
+SWGDrugPackagesApi::showFormularyDrugPackageCoverageCallback(HttpRequestWorker * worker) {
+    QString msg;
+    if (worker->error_type == QNetworkReply::NoError) {
+        msg = QString("Success! %1 bytes").arg(worker->response.length());
+    }
+    else {
+        msg = "Error: " + worker->error_str;
+    }
+
+    
+        QString json(worker->response);
+    SWGFormularyDrugPackageResponse* output = static_cast<SWGFormularyDrugPackageResponse*>(create(json, QString("SWGFormularyDrugPackageResponse")));
+    
+
+    worker->deleteLater();
+
+    emit showFormularyDrugPackageCoverageSignal(output);
+    
+}
 } /* namespace Swagger */
-
-#endif /* SWGRequestProvidersSearch_H_ */

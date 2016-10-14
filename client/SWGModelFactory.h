@@ -144,9 +144,12 @@ The response would be
 #include "SWGDrugCoverageResponse.h"
 #include "SWGDrugPackage.h"
 #include "SWGDrugSearchResponse.h"
+#include "SWGFormulary.h"
+#include "SWGFormularyDrugPackageResponse.h"
 #include "SWGMeta.h"
 #include "SWGNetwork.h"
 #include "SWGNetworkSearchResponse.h"
+#include "SWGNetworkSize.h"
 #include "SWGPlan.h"
 #include "SWGPlanCounty.h"
 #include "SWGPlanCountyBulk.h"
@@ -155,6 +158,7 @@ The response would be
 #include "SWGPlanShowResponse.h"
 #include "SWGPricing.h"
 #include "SWGProvider.h"
+#include "SWGProviderDetails.h"
 #include "SWGProviderShowResponse.h"
 #include "SWGProvidersSearchResponse.h"
 #include "SWGRatingArea.h"
@@ -166,6 +170,7 @@ The response would be
 #include "SWGServiceArea.h"
 #include "SWGServiceAreaZipCounty.h"
 #include "SWGState.h"
+#include "SWGStateNetworkSizeResponse.h"
 #include "SWGZipCode.h"
 #include "SWGZipCountiesResponse.h"
 #include "SWGZipCounty.h"
@@ -207,6 +212,12 @@ namespace Swagger {
     if(QString("SWGDrugSearchResponse").compare(type) == 0) {
       return new SWGDrugSearchResponse();
     }
+    if(QString("SWGFormulary").compare(type) == 0) {
+      return new SWGFormulary();
+    }
+    if(QString("SWGFormularyDrugPackageResponse").compare(type) == 0) {
+      return new SWGFormularyDrugPackageResponse();
+    }
     if(QString("SWGMeta").compare(type) == 0) {
       return new SWGMeta();
     }
@@ -215,6 +226,9 @@ namespace Swagger {
     }
     if(QString("SWGNetworkSearchResponse").compare(type) == 0) {
       return new SWGNetworkSearchResponse();
+    }
+    if(QString("SWGNetworkSize").compare(type) == 0) {
+      return new SWGNetworkSize();
     }
     if(QString("SWGPlan").compare(type) == 0) {
       return new SWGPlan();
@@ -239,6 +253,9 @@ namespace Swagger {
     }
     if(QString("SWGProvider").compare(type) == 0) {
       return new SWGProvider();
+    }
+    if(QString("SWGProviderDetails").compare(type) == 0) {
+      return new SWGProviderDetails();
     }
     if(QString("SWGProviderShowResponse").compare(type) == 0) {
       return new SWGProviderShowResponse();
@@ -272,6 +289,9 @@ namespace Swagger {
     }
     if(QString("SWGState").compare(type) == 0) {
       return new SWGState();
+    }
+    if(QString("SWGStateNetworkSizeResponse").compare(type) == 0) {
+      return new SWGStateNetworkSizeResponse();
     }
     if(QString("SWGZipCode").compare(type) == 0) {
       return new SWGZipCode();

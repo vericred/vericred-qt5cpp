@@ -165,10 +165,13 @@ public:
     void setId(QString* id);
 QString* getDescription();
     void setDescription(QString* description);
+qint32 getMedId();
+    void setMedId(qint32 med_id);
 
 private:
     QString* id;
 QString* description;
+qint32 med_id;
 };
 
 } /* namespace Swagger */
