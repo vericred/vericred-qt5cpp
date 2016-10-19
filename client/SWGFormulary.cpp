@@ -129,74 +129,103 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#include "SWGFormulary.h"
 
-#include <QJsonObject>
+#include "SWGHelpers.h"
 
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QObject>
+#include <QDebug>
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGFormulary::SWGFormulary(QString* json) {
+    init();
+    this->fromJson(*json);
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+SWGFormulary::SWGFormulary() {
+    init();
+}
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+SWGFormulary::~SWGFormulary() {
+    this->cleanup();
+}
+
+void
+SWGFormulary::init() {
+    id = 0;
+name = new QString("");
+}
+
+void
+SWGFormulary::cleanup() {
+    
+if(name != NULL) {
+        delete name;
+    }
+}
+
+SWGFormulary*
+SWGFormulary::fromJson(QString &json) {
+    QByteArray array (json.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+    return this;
+}
+
+void
+SWGFormulary::fromJsonObject(QJsonObject &pJson) {
+    setValue(&id, pJson["id"], "qint32", "");
+setValue(&name, pJson["name"], "QString", "QString");
+}
+
+QString
+SWGFormulary::asJson ()
+{
+    QJsonObject* obj = this->asJsonObject();
+    
+    QJsonDocument doc(*obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject*
+SWGFormulary::asJsonObject() {
+    QJsonObject* obj = new QJsonObject();
+    obj->insert("id", QJsonValue(id));
+
+    
+    toJsonValue(QString("name"), name, obj, QString("QString"));
+    
+        
+
+    return obj;
+}
+
+qint32
+SWGFormulary::getId() {
+    return id;
+}
+void
+SWGFormulary::setId(qint32 id) {
+    this->id = id;
+}
+
+QString*
+SWGFormulary::getName() {
+    return name;
+}
+void
+SWGFormulary::setName(QString* name) {
+    this->name = name;
+}
+
+
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */

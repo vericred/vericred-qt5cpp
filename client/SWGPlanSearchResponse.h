@@ -141,7 +141,7 @@ The response would be
 #include <QJsonObject>
 
 
-#include "SWGDrug.h"
+#include "SWGDrugCoverage.h"
 #include "SWGMeta.h"
 #include "SWGPlan.h"
 #include <QList>
@@ -168,13 +168,13 @@ public:
     void setMeta(SWGMeta* meta);
 QList<SWGPlan*>* getPlans();
     void setPlans(QList<SWGPlan*>* plans);
-QList<SWGDrug*>* getCoverages();
-    void setCoverages(QList<SWGDrug*>* coverages);
+QList<SWGDrugCoverage*>* getCoverages();
+    void setCoverages(QList<SWGDrugCoverage*>* coverages);
 
 private:
     SWGMeta* meta;
 QList<SWGPlan*>* plans;
-QList<SWGDrug*>* coverages;
+QList<SWGDrugCoverage*>* coverages;
 };
 
 } /* namespace Swagger */

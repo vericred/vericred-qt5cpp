@@ -168,6 +168,8 @@ premium_single_and_children = 0.0;
 premium_single_and_spouse = 0.0;
 premium_single_smoker = 0.0;
 rating_area_id = new QString("");
+premium_source = new QString("");
+updated_at = new QString("");
 }
 
 void
@@ -201,6 +203,12 @@ if(premium_single_smoker != NULL) {
 if(rating_area_id != NULL) {
         delete rating_area_id;
     }
+if(premium_source != NULL) {
+        delete premium_source;
+    }
+if(updated_at != NULL) {
+        delete updated_at;
+    }
 }
 
 SWGPricing*
@@ -225,6 +233,8 @@ setValue(&premium_single_and_children, pJson["premium_single_and_children"], "SW
 setValue(&premium_single_and_spouse, pJson["premium_single_and_spouse"], "SWGNumber", "SWGNumber");
 setValue(&premium_single_smoker, pJson["premium_single_smoker"], "SWGNumber", "SWGNumber");
 setValue(&rating_area_id, pJson["rating_area_id"], "QString", "QString");
+setValue(&premium_source, pJson["premium_source"], "QString", "QString");
+setValue(&updated_at, pJson["updated_at"], "QString", "QString");
 }
 
 QString
@@ -285,6 +295,16 @@ obj->insert("plan_id", QJsonValue(plan_id));
 
     
     toJsonValue(QString("rating_area_id"), rating_area_id, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("premium_source"), premium_source, obj, QString("QString"));
+    
+        
+
+    
+    toJsonValue(QString("updated_at"), updated_at, obj, QString("QString"));
     
         
 
@@ -388,6 +408,24 @@ SWGPricing::getRatingAreaId() {
 void
 SWGPricing::setRatingAreaId(QString* rating_area_id) {
     this->rating_area_id = rating_area_id;
+}
+
+QString*
+SWGPricing::getPremiumSource() {
+    return premium_source;
+}
+void
+SWGPricing::setPremiumSource(QString* premium_source) {
+    this->premium_source = premium_source;
+}
+
+QString*
+SWGPricing::getUpdatedAt() {
+    return updated_at;
+}
+void
+SWGPricing::setUpdatedAt(QString* updated_at) {
+    this->updated_at = updated_at;
 }
 
 

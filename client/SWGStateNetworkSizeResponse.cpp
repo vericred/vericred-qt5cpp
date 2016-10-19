@@ -129,74 +129,116 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#include "SWGStateNetworkSizeResponse.h"
 
-#include <QJsonObject>
+#include "SWGHelpers.h"
 
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QObject>
+#include <QDebug>
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGStateNetworkSizeResponse::SWGStateNetworkSizeResponse(QString* json) {
+    init();
+    this->fromJson(*json);
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+SWGStateNetworkSizeResponse::SWGStateNetworkSizeResponse() {
+    init();
+}
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+SWGStateNetworkSizeResponse::~SWGStateNetworkSizeResponse() {
+    this->cleanup();
+}
+
+void
+SWGStateNetworkSizeResponse::init() {
+    meta = new SWGMeta();
+network_sizes = new QList<SWGNetworkSize*>();
+}
+
+void
+SWGStateNetworkSizeResponse::cleanup() {
+    if(meta != NULL) {
+        delete meta;
+    }
+if(network_sizes != NULL) {
+        QList<SWGNetworkSize*>* arr = network_sizes;
+        foreach(SWGNetworkSize* o, *arr) {
+            delete o;
+        }
+        delete network_sizes;
+    }
+}
+
+SWGStateNetworkSizeResponse*
+SWGStateNetworkSizeResponse::fromJson(QString &json) {
+    QByteArray array (json.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+    return this;
+}
+
+void
+SWGStateNetworkSizeResponse::fromJsonObject(QJsonObject &pJson) {
+    setValue(&meta, pJson["meta"], "SWGMeta", "SWGMeta");
+setValue(&network_sizes, pJson["network_sizes"], "QList", "SWGNetworkSize");
+}
+
+QString
+SWGStateNetworkSizeResponse::asJson ()
+{
+    QJsonObject* obj = this->asJsonObject();
+    
+    QJsonDocument doc(*obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject*
+SWGStateNetworkSizeResponse::asJsonObject() {
+    QJsonObject* obj = new QJsonObject();
+    
+    
+    toJsonValue(QString("meta"), meta, obj, QString("SWGMeta"));
+    
+        
+
+    
+    QList<SWGNetworkSize*>* network_sizesList = network_sizes;
+    QJsonArray network_sizesJsonArray;
+    toJsonArray((QList<void*>*)network_sizes, &network_sizesJsonArray, "network_sizes", "SWGNetworkSize");
+
+    obj->insert("network_sizes", network_sizesJsonArray);
+    
+
+    return obj;
+}
+
+SWGMeta*
+SWGStateNetworkSizeResponse::getMeta() {
+    return meta;
+}
+void
+SWGStateNetworkSizeResponse::setMeta(SWGMeta* meta) {
+    this->meta = meta;
+}
+
+QList<SWGNetworkSize*>*
+SWGStateNetworkSizeResponse::getNetworkSizes() {
+    return network_sizes;
+}
+void
+SWGStateNetworkSizeResponse::setNetworkSizes(QList<SWGNetworkSize*>* network_sizes) {
+    this->network_sizes = network_sizes;
+}
+
+
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */

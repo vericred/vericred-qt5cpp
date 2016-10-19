@@ -165,22 +165,25 @@ public:
     void setPlanId(QString* plan_id);
 QString* getDrugPackageId();
     void setDrugPackageId(QString* drug_package_id);
-QString* getTier();
-    void setTier(QString* tier);
+qint32 getMedId();
+    void setMedId(qint32 med_id);
 bool getQuantityLimit();
     void setQuantityLimit(bool quantity_limit);
 bool getPriorAuthorization();
     void setPriorAuthorization(bool prior_authorization);
 bool getStepTherapy();
     void setStepTherapy(bool step_therapy);
+QString* getTier();
+    void setTier(QString* tier);
 
 private:
     QString* plan_id;
 QString* drug_package_id;
-QString* tier;
+qint32 med_id;
 bool quantity_limit;
 bool prior_authorization;
 bool step_therapy;
+QString* tier;
 };
 
 } /* namespace Swagger */

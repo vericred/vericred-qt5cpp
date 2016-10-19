@@ -130,19 +130,17 @@ The response would be
  */
 
 /*
- * SWGRequestProvidersSearch.h
+ * SWGFormulary.h
  * 
  * 
  */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#ifndef SWGFormulary_H_
+#define SWGFormulary_H_
 
 #include <QJsonObject>
 
 
-#include "SWGNumber.h"
-#include <QList>
 #include <QString>
 
 #include "SWGObject.h"
@@ -150,53 +148,29 @@ The response would be
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
+class SWGFormulary: public SWGObject {
 public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
+    SWGFormulary();
+    SWGFormulary(QString* json);
+    virtual ~SWGFormulary();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+    SWGFormulary* fromJson(QString &jsonString);
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+    qint32 getId();
+    void setId(qint32 id);
+QString* getName();
+    void setName(QString* name);
 
 private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
+    qint32 id;
+QString* name;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */
+#endif /* SWGFormulary_H_ */

@@ -129,74 +129,128 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#include "SWGFormularyDrugPackageResponse.h"
 
-#include <QJsonObject>
+#include "SWGHelpers.h"
 
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QObject>
+#include <QDebug>
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGFormularyDrugPackageResponse::SWGFormularyDrugPackageResponse(QString* json) {
+    init();
+    this->fromJson(*json);
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+SWGFormularyDrugPackageResponse::SWGFormularyDrugPackageResponse() {
+    init();
+}
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+SWGFormularyDrugPackageResponse::~SWGFormularyDrugPackageResponse() {
+    this->cleanup();
+}
+
+void
+SWGFormularyDrugPackageResponse::init() {
+    coverage = new SWGDrugCoverage();
+drug_package = new SWGDrugPackage();
+formulary = new SWGFormulary();
+}
+
+void
+SWGFormularyDrugPackageResponse::cleanup() {
+    if(coverage != NULL) {
+        delete coverage;
+    }
+if(drug_package != NULL) {
+        delete drug_package;
+    }
+if(formulary != NULL) {
+        delete formulary;
+    }
+}
+
+SWGFormularyDrugPackageResponse*
+SWGFormularyDrugPackageResponse::fromJson(QString &json) {
+    QByteArray array (json.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+    return this;
+}
+
+void
+SWGFormularyDrugPackageResponse::fromJsonObject(QJsonObject &pJson) {
+    setValue(&coverage, pJson["coverage"], "SWGDrugCoverage", "SWGDrugCoverage");
+setValue(&drug_package, pJson["drug_package"], "SWGDrugPackage", "SWGDrugPackage");
+setValue(&formulary, pJson["formulary"], "SWGFormulary", "SWGFormulary");
+}
+
+QString
+SWGFormularyDrugPackageResponse::asJson ()
+{
+    QJsonObject* obj = this->asJsonObject();
+    
+    QJsonDocument doc(*obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject*
+SWGFormularyDrugPackageResponse::asJsonObject() {
+    QJsonObject* obj = new QJsonObject();
+    
+    
+    toJsonValue(QString("coverage"), coverage, obj, QString("SWGDrugCoverage"));
+    
+        
+
+    
+    toJsonValue(QString("drug_package"), drug_package, obj, QString("SWGDrugPackage"));
+    
+        
+
+    
+    toJsonValue(QString("formulary"), formulary, obj, QString("SWGFormulary"));
+    
+        
+
+    return obj;
+}
+
+SWGDrugCoverage*
+SWGFormularyDrugPackageResponse::getCoverage() {
+    return coverage;
+}
+void
+SWGFormularyDrugPackageResponse::setCoverage(SWGDrugCoverage* coverage) {
+    this->coverage = coverage;
+}
+
+SWGDrugPackage*
+SWGFormularyDrugPackageResponse::getDrugPackage() {
+    return drug_package;
+}
+void
+SWGFormularyDrugPackageResponse::setDrugPackage(SWGDrugPackage* drug_package) {
+    this->drug_package = drug_package;
+}
+
+SWGFormulary*
+SWGFormularyDrugPackageResponse::getFormulary() {
+    return formulary;
+}
+void
+SWGFormularyDrugPackageResponse::setFormulary(SWGFormulary* formulary) {
+    this->formulary = formulary;
+}
+
+
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */

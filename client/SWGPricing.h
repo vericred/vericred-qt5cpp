@@ -185,6 +185,10 @@ SWGNumber* getPremiumSingleSmoker();
     void setPremiumSingleSmoker(SWGNumber* premium_single_smoker);
 QString* getRatingAreaId();
     void setRatingAreaId(QString* rating_area_id);
+QString* getPremiumSource();
+    void setPremiumSource(QString* premium_source);
+QString* getUpdatedAt();
+    void setUpdatedAt(QString* updated_at);
 
 private:
     qint32 age;
@@ -198,6 +202,8 @@ SWGNumber* premium_single_and_children;
 SWGNumber* premium_single_and_spouse;
 SWGNumber* premium_single_smoker;
 QString* rating_area_id;
+QString* premium_source;
+QString* updated_at;
 };
 
 } /* namespace Swagger */

@@ -217,6 +217,7 @@ prenatal_postnatal_care = new QString("");
 preventative_care = new QString("");
 premium_subsidized = 0.0;
 premium = 0.0;
+premium_source = new QString("");
 primary_care_physician = new QString("");
 rehabilitation_services = new QString("");
 service_area_id = new QString("");
@@ -390,6 +391,9 @@ if(premium_subsidized != NULL) {
 if(premium != NULL) {
         delete premium;
     }
+if(premium_source != NULL) {
+        delete premium_source;
+    }
 if(primary_care_physician != NULL) {
         delete primary_care_physician;
     }
@@ -492,6 +496,7 @@ setValue(&prenatal_postnatal_care, pJson["prenatal_postnatal_care"], "QString", 
 setValue(&preventative_care, pJson["preventative_care"], "QString", "QString");
 setValue(&premium_subsidized, pJson["premium_subsidized"], "SWGNumber", "SWGNumber");
 setValue(&premium, pJson["premium"], "SWGNumber", "SWGNumber");
+setValue(&premium_source, pJson["premium_source"], "QString", "QString");
 setValue(&primary_care_physician, pJson["primary_care_physician"], "QString", "QString");
 setValue(&rehabilitation_services, pJson["rehabilitation_services"], "QString", "QString");
 setValue(&service_area_id, pJson["service_area_id"], "QString", "QString");
@@ -772,6 +777,11 @@ obj->insert("out_of_network_ids", QJsonValue(out_of_network_ids));
 
     
     toJsonValue(QString("premium"), premium, obj, QString("SWGNumber"));
+    
+        
+
+    
+    toJsonValue(QString("premium_source"), premium_source, obj, QString("QString"));
     
         
 
@@ -1363,6 +1373,15 @@ SWGPlanSearchResult::getPremium() {
 void
 SWGPlanSearchResult::setPremium(SWGNumber* premium) {
     this->premium = premium;
+}
+
+QString*
+SWGPlanSearchResult::getPremiumSource() {
+    return premium_source;
+}
+void
+SWGPlanSearchResult::setPremiumSource(QString* premium_source) {
+    this->premium_source = premium_source;
 }
 
 QString*

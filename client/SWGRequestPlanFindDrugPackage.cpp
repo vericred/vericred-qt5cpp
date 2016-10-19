@@ -158,6 +158,7 @@ SWGRequestPlanFindDrugPackage::~SWGRequestPlanFindDrugPackage() {
 void
 SWGRequestPlanFindDrugPackage::init() {
     id = new QString("");
+med_id = 0;
 }
 
 void
@@ -165,6 +166,7 @@ SWGRequestPlanFindDrugPackage::cleanup() {
     if(id != NULL) {
         delete id;
     }
+
 }
 
 SWGRequestPlanFindDrugPackage*
@@ -179,6 +181,7 @@ SWGRequestPlanFindDrugPackage::fromJson(QString &json) {
 void
 SWGRequestPlanFindDrugPackage::fromJsonObject(QJsonObject &pJson) {
     setValue(&id, pJson["id"], "QString", "QString");
+setValue(&med_id, pJson["med_id"], "qint32", "");
 }
 
 QString
@@ -199,6 +202,7 @@ SWGRequestPlanFindDrugPackage::asJsonObject() {
     toJsonValue(QString("id"), id, obj, QString("QString"));
     
         
+obj->insert("med_id", QJsonValue(med_id));
 
     return obj;
 }
@@ -210,6 +214,15 @@ SWGRequestPlanFindDrugPackage::getId() {
 void
 SWGRequestPlanFindDrugPackage::setId(QString* id) {
     this->id = id;
+}
+
+qint32
+SWGRequestPlanFindDrugPackage::getMedId() {
+    return med_id;
+}
+void
+SWGRequestPlanFindDrugPackage::setMedId(qint32 med_id) {
+    this->med_id = med_id;
 }
 
 

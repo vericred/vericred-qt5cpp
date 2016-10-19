@@ -130,13 +130,13 @@ The response would be
  */
 
 /*
- * SWGRequestProvidersSearch.h
+ * SWGProviderDetails.h
  * 
  * 
  */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#ifndef SWGProviderDetails_H_
+#define SWGProviderDetails_H_
 
 #include <QJsonObject>
 
@@ -150,53 +150,110 @@ The response would be
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
+class SWGProviderDetails: public SWGObject {
 public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
+    SWGProviderDetails();
+    SWGProviderDetails(QString* json);
+    virtual ~SWGProviderDetails();
     void init();
     void cleanup();
 
     QString asJson ();
     QJsonObject* asJsonObject();
     void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+    SWGProviderDetails* fromJson(QString &jsonString);
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
+    bool getAcceptingChangeOfPayorPatients();
+    void setAcceptingChangeOfPayorPatients(bool accepting_change_of_payor_patients);
+bool getAcceptingMedicaidPatients();
+    void setAcceptingMedicaidPatients(bool accepting_medicaid_patients);
+bool getAcceptingMedicarePatients();
+    void setAcceptingMedicarePatients(bool accepting_medicare_patients);
+bool getAcceptingPrivatePatients();
+    void setAcceptingPrivatePatients(bool accepting_private_patients);
+bool getAcceptingReferralPatients();
+    void setAcceptingReferralPatients(bool accepting_referral_patients);
+QString* getCity();
+    void setCity(QString* city);
+QString* getEmail();
+    void setEmail(QString* email);
+QString* getGender();
+    void setGender(QString* gender);
+QString* getFirstName();
+    void setFirstName(QString* first_name);
+qint32 getId();
+    void setId(qint32 id);
+QString* getLastName();
+    void setLastName(QString* last_name);
+SWGNumber* getLatitude();
+    void setLatitude(SWGNumber* latitude);
+SWGNumber* getLongitude();
+    void setLongitude(SWGNumber* longitude);
+QString* getMiddleName();
+    void setMiddleName(QString* middle_name);
 QList<qint32>* getNetworkIds();
     void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
+QString* getOrganizationName();
+    void setOrganizationName(QString* organization_name);
+QString* getPersonalPhone();
+    void setPersonalPhone(QString* personal_phone);
+QString* getPhone();
+    void setPhone(QString* phone);
+QString* getPresentationName();
+    void setPresentationName(QString* presentation_name);
+QString* getSpecialty();
+    void setSpecialty(QString* specialty);
+QString* getState();
+    void setState(QString* state);
+qint32 getStateId();
+    void setStateId(qint32 state_id);
+QString* getStreetLine1();
+    void setStreetLine1(QString* street_line_1);
+QString* getStreetLine2();
+    void setStreetLine2(QString* street_line_2);
+QString* getSuffix();
+    void setSuffix(QString* suffix);
+QString* getTitle();
+    void setTitle(QString* title);
 QString* getType();
     void setType(QString* type);
+QString* getZipCode();
+    void setZipCode(QString* zip_code);
+QList<QString*>* getHiosIds();
+    void setHiosIds(QList<QString*>* hios_ids);
 
 private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
+    bool accepting_change_of_payor_patients;
+bool accepting_medicaid_patients;
+bool accepting_medicare_patients;
+bool accepting_private_patients;
+bool accepting_referral_patients;
+QString* city;
+QString* email;
+QString* gender;
+QString* first_name;
+qint32 id;
+QString* last_name;
+SWGNumber* latitude;
+SWGNumber* longitude;
+QString* middle_name;
 QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
+QString* organization_name;
+QString* personal_phone;
+QString* phone;
+QString* presentation_name;
+QString* specialty;
+QString* state;
+qint32 state_id;
+QString* street_line_1;
+QString* street_line_2;
+QString* suffix;
+QString* title;
 QString* type;
+QString* zip_code;
+QList<QString*>* hios_ids;
 };
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */
+#endif /* SWGProviderDetails_H_ */

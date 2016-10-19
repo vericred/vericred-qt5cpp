@@ -159,7 +159,7 @@ void
 SWGPlanSearchResponse::init() {
     meta = new SWGMeta();
 plans = new QList<SWGPlan*>();
-coverages = new QList<SWGDrug*>();
+coverages = new QList<SWGDrugCoverage*>();
 }
 
 void
@@ -175,8 +175,8 @@ if(plans != NULL) {
         delete plans;
     }
 if(coverages != NULL) {
-        QList<SWGDrug*>* arr = coverages;
-        foreach(SWGDrug* o, *arr) {
+        QList<SWGDrugCoverage*>* arr = coverages;
+        foreach(SWGDrugCoverage* o, *arr) {
             delete o;
         }
         delete coverages;
@@ -196,7 +196,7 @@ void
 SWGPlanSearchResponse::fromJsonObject(QJsonObject &pJson) {
     setValue(&meta, pJson["meta"], "SWGMeta", "SWGMeta");
 setValue(&plans, pJson["plans"], "QList", "SWGPlan");
-setValue(&coverages, pJson["coverages"], "QList", "SWGDrug");
+setValue(&coverages, pJson["coverages"], "QList", "SWGDrugCoverage");
 }
 
 QString
@@ -227,9 +227,9 @@ SWGPlanSearchResponse::asJsonObject() {
     
 
     
-    QList<SWGDrug*>* coveragesList = coverages;
+    QList<SWGDrugCoverage*>* coveragesList = coverages;
     QJsonArray coveragesJsonArray;
-    toJsonArray((QList<void*>*)coverages, &coveragesJsonArray, "coverages", "SWGDrug");
+    toJsonArray((QList<void*>*)coverages, &coveragesJsonArray, "coverages", "SWGDrugCoverage");
 
     obj->insert("coverages", coveragesJsonArray);
     
@@ -255,12 +255,12 @@ SWGPlanSearchResponse::setPlans(QList<SWGPlan*>* plans) {
     this->plans = plans;
 }
 
-QList<SWGDrug*>*
+QList<SWGDrugCoverage*>*
 SWGPlanSearchResponse::getCoverages() {
     return coverages;
 }
 void
-SWGPlanSearchResponse::setCoverages(QList<SWGDrug*>* coverages) {
+SWGPlanSearchResponse::setCoverages(QList<SWGDrugCoverage*>* coverages) {
     this->coverages = coverages;
 }
 

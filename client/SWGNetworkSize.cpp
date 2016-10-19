@@ -129,74 +129,116 @@ The response would be
  * limitations under the License.
  */
 
-/*
- * SWGRequestProvidersSearch.h
- * 
- * 
- */
 
-#ifndef SWGRequestProvidersSearch_H_
-#define SWGRequestProvidersSearch_H_
+#include "SWGNetworkSize.h"
 
-#include <QJsonObject>
+#include "SWGHelpers.h"
 
-
-#include "SWGNumber.h"
-#include <QList>
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QObject>
+#include <QDebug>
 
 namespace Swagger {
 
-class SWGRequestProvidersSearch: public SWGObject {
-public:
-    SWGRequestProvidersSearch();
-    SWGRequestProvidersSearch(QString* json);
-    virtual ~SWGRequestProvidersSearch();
-    void init();
-    void cleanup();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGRequestProvidersSearch* fromJson(QString &jsonString);
+SWGNetworkSize::SWGNetworkSize(QString* json) {
+    init();
+    this->fromJson(*json);
+}
 
-    bool getAcceptsInsurance();
-    void setAcceptsInsurance(bool accepts_insurance);
-QList<QString*>* getHiosIds();
-    void setHiosIds(QList<QString*>* hios_ids);
-SWGNumber* getMinScore();
-    void setMinScore(SWGNumber* min_score);
-QList<qint32>* getNetworkIds();
-    void setNetworkIds(QList<qint32>* network_ids);
-qint32 getPage();
-    void setPage(qint32 page);
-qint32 getPerPage();
-    void setPerPage(qint32 per_page);
-qint32 getRadius();
-    void setRadius(qint32 radius);
-QString* getSearchTerm();
-    void setSearchTerm(QString* search_term);
-QString* getZipCode();
-    void setZipCode(QString* zip_code);
-QString* getType();
-    void setType(QString* type);
+SWGNetworkSize::SWGNetworkSize() {
+    init();
+}
 
-private:
-    bool accepts_insurance;
-QList<QString*>* hios_ids;
-SWGNumber* min_score;
-QList<qint32>* network_ids;
-qint32 page;
-qint32 per_page;
-qint32 radius;
-QString* search_term;
-QString* zip_code;
-QString* type;
-};
+SWGNetworkSize::~SWGNetworkSize() {
+    this->cleanup();
+}
+
+void
+SWGNetworkSize::init() {
+    network_id = 0;
+count = 0;
+state_id = new QString("");
+}
+
+void
+SWGNetworkSize::cleanup() {
+    
+
+if(state_id != NULL) {
+        delete state_id;
+    }
+}
+
+SWGNetworkSize*
+SWGNetworkSize::fromJson(QString &json) {
+    QByteArray array (json.toStdString().c_str());
+    QJsonDocument doc = QJsonDocument::fromJson(array);
+    QJsonObject jsonObject = doc.object();
+    this->fromJsonObject(jsonObject);
+    return this;
+}
+
+void
+SWGNetworkSize::fromJsonObject(QJsonObject &pJson) {
+    setValue(&network_id, pJson["network_id"], "qint32", "");
+setValue(&count, pJson["count"], "qint32", "");
+setValue(&state_id, pJson["state_id"], "QString", "QString");
+}
+
+QString
+SWGNetworkSize::asJson ()
+{
+    QJsonObject* obj = this->asJsonObject();
+    
+    QJsonDocument doc(*obj);
+    QByteArray bytes = doc.toJson();
+    return QString(bytes);
+}
+
+QJsonObject*
+SWGNetworkSize::asJsonObject() {
+    QJsonObject* obj = new QJsonObject();
+    obj->insert("network_id", QJsonValue(network_id));
+obj->insert("count", QJsonValue(count));
+
+    
+    toJsonValue(QString("state_id"), state_id, obj, QString("QString"));
+    
+        
+
+    return obj;
+}
+
+qint32
+SWGNetworkSize::getNetworkId() {
+    return network_id;
+}
+void
+SWGNetworkSize::setNetworkId(qint32 network_id) {
+    this->network_id = network_id;
+}
+
+qint32
+SWGNetworkSize::getCount() {
+    return count;
+}
+void
+SWGNetworkSize::setCount(qint32 count) {
+    this->count = count;
+}
+
+QString*
+SWGNetworkSize::getStateId() {
+    return state_id;
+}
+void
+SWGNetworkSize::setStateId(QString* state_id) {
+    this->state_id = state_id;
+}
+
+
 
 } /* namespace Swagger */
 
-#endif /* SWGRequestProvidersSearch_H_ */
