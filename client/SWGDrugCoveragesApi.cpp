@@ -216,51 +216,81 @@ space                     ::= /[ \t]/+
  * limitations under the License.
  */
 
-/*
- * SWGDrugPackage.h
- * 
- * 
- */
+#include "SWGDrugCoveragesApi.h"
+#include "SWGHelpers.h"
+#include "SWGModelFactory.h"
 
-#ifndef SWGDrugPackage_H_
-#define SWGDrugPackage_H_
-
-#include <QJsonObject>
-
-
-#include <QString>
-
-#include "SWGObject.h"
-
+#include <QJsonArray>
+#include <QJsonDocument>
 
 namespace Swagger {
+SWGDrugCoveragesApi::SWGDrugCoveragesApi() {}
 
-class SWGDrugPackage: public SWGObject {
-public:
-    SWGDrugPackage();
-    SWGDrugPackage(QString* json);
-    virtual ~SWGDrugPackage();
-    void init();
-    void cleanup();
+SWGDrugCoveragesApi::~SWGDrugCoveragesApi() {}
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGDrugPackage* fromJson(QString &jsonString);
+SWGDrugCoveragesApi::SWGDrugCoveragesApi(QString host, QString basePath) {
+    this->host = host;
+    this->basePath = basePath;
+}
 
-    QString* getId();
-    void setId(QString* id);
-QString* getDescription();
-    void setDescription(QString* description);
-qint32 getMedId();
-    void setMedId(qint32 med_id);
+void
+SWGDrugCoveragesApi::getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode) {
+    QString fullPath;
+    fullPath.append(this->host).append(this->basePath).append("/drug_packages/{ndc_package_code}/coverages");
 
-private:
-    QString* id;
-QString* description;
-qint32 med_id;
-};
+    QString ndcPackageCodePathParam("{"); ndcPackageCodePathParam.append("ndcPackageCode").append("}");
+    fullPath.replace(ndcPackageCodePathParam, stringValue(ndcPackageCode));
 
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("audience"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(audience)));
+
+    if (fullPath.indexOf("?") > 0) 
+      fullPath.append("&");
+    else 
+      fullPath.append("?");
+    fullPath.append(QUrl::toPercentEncoding("stateCode"))
+        .append("=")
+        .append(QUrl::toPercentEncoding(stringValue(stateCode)));
+
+
+    HttpRequestWorker *worker = new HttpRequestWorker();
+    HttpRequestInput input(fullPath, "GET");
+
+    
+
+
+
+    connect(worker,
+            &HttpRequestWorker::on_execution_finished,
+            this,
+            &SWGDrugCoveragesApi::getDrugCoveragesCallback);
+
+    worker->execute(&input);
+}
+
+void
+SWGDrugCoveragesApi::getDrugCoveragesCallback(HttpRequestWorker * worker) {
+    QString msg;
+    if (worker->error_type == QNetworkReply::NoError) {
+        msg = QString("Success! %1 bytes").arg(worker->response.length());
+    }
+    else {
+        msg = "Error: " + worker->error_str;
+    }
+
+    
+        QString json(worker->response);
+    SWGDrugCoverageResponse* output = static_cast<SWGDrugCoverageResponse*>(create(json, QString("SWGDrugCoverageResponse")));
+    
+
+    worker->deleteLater();
+
+    emit getDrugCoveragesSignal(output);
+    
+}
 } /* namespace Swagger */
-
-#endif /* SWGDrugPackage_H_ */

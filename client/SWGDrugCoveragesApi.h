@@ -147,19 +147,51 @@ In [this other Summary of Benefits &amp; Coverage](https://s3.amazonaws.com/veri
 Here's a description of the benefits summary string, represented as a context-free grammar:
 
 ```
-<cost-share>     ::= <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> <tier-limit> "/" <tier> <opt-num-prefix> <value> <opt-per-unit> <deductible> "|" <benefit-limit>
-<tier>           ::= "In-Network:" | "In-Network-Tier-2:" | "Out-of-Network:"
-<opt-num-prefix> ::= "first" <num> <unit> | ""
-<unit>           ::= "day(s)" | "visit(s)" | "exam(s)" | "item(s)"
-<value>          ::= <ddct_moop> | <copay> | <coinsurance> | <compound> | "unknown" | "Not Applicable"
-<compound>       ::= <copay> <deductible> "then" <coinsurance> <deductible> | <copay> <deductible> "then" <copay> <deductible> | <coinsurance> <deductible> "then" <coinsurance> <deductible>
-<copay>          ::= "$" <num>
-<coinsurace>     ::= <num> "%"
-<ddct_moop>      ::= <copay> | "Included in Medical" | "Unlimited"
-<opt-per-unit>   ::= "per day" | "per visit" | "per stay" | ""
-<deductible>     ::= "before deductible" | "after deductible" | ""
-<tier-limit>     ::= ", " <limit> | ""
-<benefit-limit>  ::= <limit> | ""
+root                      ::= coverage
+
+coverage                  ::= (simple_coverage | tiered_coverage) (space pipe space coverage_limitation)?
+tiered_coverage           ::= tier (space slash space tier)*
+tier                      ::= tier_name colon space (tier_coverage | not_applicable)
+tier_coverage             ::= simple_coverage (space (then | or | and) space simple_coverage)* tier_limitation?
+simple_coverage           ::= (pre_coverage_limitation space)? coverage_amount (space post_coverage_limitation)? (comma? space coverage_condition)?
+coverage_limitation       ::= "limit" colon space (((simple_coverage | simple_limitation) (semicolon space see_carrier_documentation)?) | see_carrier_documentation | waived_if_admitted)
+waived_if_admitted        ::= ("copay" space)? "waived if admitted"
+simple_limitation         ::= pre_coverage_limitation space "copay applies"
+tier_name                 ::= "In-Network-Tier-2" | "Out-of-Network" | "In-Network"
+tier_limitation           ::= comma space "up to" space (currency | (integer space time_unit plural?)) (space post_coverage_limitation)?
+coverage_amount           ::= currency | unlimited | included | unknown | percentage | (digits space (treatment_unit | time_unit) plural?)
+pre_coverage_limitation   ::= first space digits space time_unit plural?
+post_coverage_limitation  ::= (((then space currency) | "per condition") space)? "per" space (treatment_unit | (integer space time_unit) | time_unit) plural?
+coverage_condition        ::= ("before deductible" | "after deductible" | "penalty" | allowance | "in-state" | "out-of-state") (space allowance)?
+allowance                 ::= upto_allowance | after_allowance
+upto_allowance            ::= "up to" space (currency space)? "allowance"
+after_allowance           ::= "after" space (currency space)? "allowance"
+see_carrier_documentation ::= "see carrier documentation for more information"
+unknown                   ::= "unknown"
+unlimited                 ::= /[uU]nlimited/
+included                  ::= /[iI]ncluded in [mM]edical/
+time_unit                 ::= /[hH]our/ | (((/[cC]alendar/ | /[cC]ontract/) space)? /[yY]ear/) | /[mM]onth/ | /[dD]ay/ | /[wW]eek/ | /[vV]isit/ | /[lL]ifetime/ | ((((/[bB]enefit/ plural?) | /[eE]ligibility/) space)? /[pP]eriod/)
+treatment_unit            ::= /[pP]erson/ | /[gG]roup/ | /[cC]ondition/ | /[sS]cript/ | /[vV]isit/ | /[eE]xam/ | /[iI]tem/ | /[sS]tay/ | /[tT]reatment/ | /[aA]dmission/ | /[eE]pisode/
+comma                     ::= ","
+colon                     ::= ":"
+semicolon                 ::= ";"
+pipe                      ::= "|"
+slash                     ::= "/"
+plural                    ::= "(s)" | "s"
+then                      ::= "then" | ("," space) | space
+or                        ::= "or"
+and                       ::= "and"
+not_applicable            ::= "Not Applicable" | "N/A" | "NA"
+first                     ::= "first"
+currency                  ::= "$" number
+percentage                ::= number "%"
+number                    ::= float | integer
+float                     ::= digits "." digits
+integer                   ::= /[0-9]/+ (comma_int | under_int)*
+comma_int                 ::= ("," /[0-9]/*3) !"_"
+under_int                 ::= ("_" /[0-9]/*3) !","
+digits                    ::= /[0-9]/+ ("_" /[0-9]/+)*
+space                     ::= /[ \t]/+
 ```
 
 
@@ -184,83 +216,37 @@ Here's a description of the benefits summary string, represented as a context-fr
  * limitations under the License.
  */
 
-/*
- * SWGPricing.h
- * 
- * 
- */
+#ifndef _SWG_SWGDrugCoveragesApi_H_
+#define _SWG_SWGDrugCoveragesApi_H_
 
-#ifndef SWGPricing_H_
-#define SWGPricing_H_
+#include "SWGHttpRequest.h"
 
-#include <QJsonObject>
-
-
-#include "SWGNumber.h"
-#include <QDate>
 #include <QString>
+#include "SWGDrugCoverageResponse.h"
 
-#include "SWGObject.h"
-
+#include <QObject>
 
 namespace Swagger {
 
-class SWGPricing: public SWGObject {
+class SWGDrugCoveragesApi: public QObject {
+    Q_OBJECT
+
 public:
-    SWGPricing();
-    SWGPricing(QString* json);
-    virtual ~SWGPricing();
-    void init();
-    void cleanup();
+    SWGDrugCoveragesApi();
+    SWGDrugCoveragesApi(QString host, QString basePath);
+    ~SWGDrugCoveragesApi();
 
-    QString asJson ();
-    QJsonObject* asJsonObject();
-    void fromJsonObject(QJsonObject &json);
-    SWGPricing* fromJson(QString &jsonString);
+    QString host;
+    QString basePath;
 
-    qint32 getAge();
-    void setAge(qint32 age);
-QDate* getEffectiveDate();
-    void setEffectiveDate(QDate* effective_date);
-QDate* getExpirationDate();
-    void setExpirationDate(QDate* expiration_date);
-qint32 getPlanId();
-    void setPlanId(qint32 plan_id);
-SWGNumber* getPremiumChildOnly();
-    void setPremiumChildOnly(SWGNumber* premium_child_only);
-SWGNumber* getPremiumFamily();
-    void setPremiumFamily(SWGNumber* premium_family);
-SWGNumber* getPremiumSingle();
-    void setPremiumSingle(SWGNumber* premium_single);
-SWGNumber* getPremiumSingleAndChildren();
-    void setPremiumSingleAndChildren(SWGNumber* premium_single_and_children);
-SWGNumber* getPremiumSingleAndSpouse();
-    void setPremiumSingleAndSpouse(SWGNumber* premium_single_and_spouse);
-SWGNumber* getPremiumSingleSmoker();
-    void setPremiumSingleSmoker(SWGNumber* premium_single_smoker);
-QString* getRatingAreaId();
-    void setRatingAreaId(QString* rating_area_id);
-QString* getPremiumSource();
-    void setPremiumSource(QString* premium_source);
-QString* getUpdatedAt();
-    void setUpdatedAt(QString* updated_at);
-
+    void getDrugCoverages(QString* ndcPackageCode, QString* audience, QString* stateCode);
+    
 private:
-    qint32 age;
-QDate* effective_date;
-QDate* expiration_date;
-qint32 plan_id;
-SWGNumber* premium_child_only;
-SWGNumber* premium_family;
-SWGNumber* premium_single;
-SWGNumber* premium_single_and_children;
-SWGNumber* premium_single_and_spouse;
-SWGNumber* premium_single_smoker;
-QString* rating_area_id;
-QString* premium_source;
-QString* updated_at;
+    void getDrugCoveragesCallback (HttpRequestWorker * worker);
+    
+signals:
+    void getDrugCoveragesSignal(SWGDrugCoverageResponse* summary);
+    
 };
-
-} /* namespace Swagger */
-
-#endif /* SWGPricing_H_ */
+}
+#endif
